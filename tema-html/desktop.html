@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+	<meta charset="utf-8" />
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	<title>DeTodo24 - Home</title>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap"
+		rel="stylesheet" />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+		rel="stylesheet" />
+	<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+	<script>
+		tailwind.config = {
+			darkMode: "class",
+			theme: {
+				extend: {
+					colors: {
+						primary: "#F26522",
+						secondary: "#00063d",
+						"brand-orange": "#f26419",
+						"background-light": "#ebebeb",
+					},
+					fontFamily: {
+						sans: ["Inter", "sans-serif"],
+					},
+				},
+			},
+		};
+	</script>
+	<style type="text/tailwindcss">
+		@layer base {
+            body {
+                @apply bg-background-light text-slate-900 antialiased;
+            }
+        }
+        .hero-gradient {
+            background: linear-gradient(90deg, #00063d 0%, rgba(0, 6, 61, 0.95) 40%, rgba(242, 101, 34, 0.4) 100%);
+        }
+        .promo-gradient {
+            background: linear-gradient(135deg, #F26522 0%, #D14D15 100%);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .product-card-shadow {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+        .subtle-shadow {
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+        }
+        .store-overlay-gradient {
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen">
+	<header class="bg-white border-b border-gray-200 sticky top-0 z-50 h-20 flex items-center">
+		<div class="container mx-auto px-4 lg:px-8 flex items-center justify-between gap-6">
+			<div class="flex items-center gap-3 shrink-0">
+				<div class="bg-primary p-2 rounded-lg flex items-center justify-center">
+					<span class="material-symbols-outlined text-white text-2xl">shopping_bag</span>
+				</div>
+				<span class="text-2xl font-bold tracking-tight text-secondary">DeTodo24</span>
+			</div>
+			<div class="flex-1 max-w-xl hidden md:block">
+				<div class="relative group">
+					<input
+						class="w-full bg-slate-100 border-none rounded-full py-2.5 pl-12 pr-4 focus:ring-2 focus:ring-primary transition-all text-sm"
+						placeholder="Busca productos, marcas y más..." type="text" />
+					<span
+						class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary">search</span>
+				</div>
+			</div>
+			<nav class="hidden lg:flex items-center gap-8 text-sm font-semibold text-slate-600">
+				<a class="hover:text-primary transition-colors py-2" href="#">Tienda</a>
+				<a class="hover:text-primary transition-colors py-2" href="#">Calculadora de Envío</a>
+				<a class="hover:text-primary transition-colors py-2" href="#">Rastrea tu Paquete</a>
+			</nav>
+			<div class="flex items-center gap-4">
+				<button class="p-2 hover:bg-slate-100 rounded-full transition-colors relative">
+					<span class="material-symbols-outlined text-slate-700">shopping_cart</span>
+					<span
+						class="absolute top-1 right-1 bg-primary text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">3</span>
+				</button>
+				<button class="p-2 hover:bg-slate-100 rounded-full transition-colors">
+					<span class="material-symbols-outlined text-slate-700">person</span>
+				</button>
+			</div>
+		</div>
+	</header>
+	<div class="bg-white shadow-sm border-b border-gray-200 overflow-x-auto no-scrollbar">
+		<div class="container mx-auto px-4 lg:px-8 py-3">
+			<div class="flex items-center gap-2 text-sm whitespace-nowrap">
+				<a class="bg-primary text-white px-5 py-2 rounded-full font-semibold" href="#">Vestuario</a>
+				<a class="px-4 py-2 rounded-full text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors"
+					href="#">Belleza</a>
+				<a class="px-4 py-2 rounded-full text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors"
+					href="#">Hogar</a>
+				<a class="px-4 py-2 rounded-full text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors"
+					href="#">Juguetes</a>
+				<a class="px-4 py-2 rounded-full text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors"
+					href="#">Tecnología</a>
+				<a class="px-4 py-2 rounded-full text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors"
+					href="#">Deportes</a>
+				<a class="px-4 py-2 rounded-full text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors"
+					href="#">Supermercado</a>
+				<a class="px-4 py-2 rounded-full text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors"
+					href="#">Bebés</a>
+				<a class="px-4 py-2 rounded-full text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors"
+					href="#">Oficina</a>
+				<a class="px-4 py-2 rounded-full text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors"
+					href="#">Ferretería</a>
+				<a class="px-4 py-2 rounded-full text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors"
+					href="#">Escolar</a>
+			</div>
+		</div>
+	</div>
+	<main class="py-8 space-y-10">
+		<section class="container mx-auto px-4 lg:px-8">
+			<div
+				class="relative rounded-[2rem] overflow-hidden bg-secondary min-h-[400px] md:min-h-[520px] lg:min-h-[580px] shadow-2xl flex items-center">
+				<img alt="Background" class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-50"
+					src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCXL9szgLh4Sf-Xl4YNw4PYGVzVd67M4HhI81aJFjISlOHCu6e2-WJbdvIHdbbnOBm-V6BUSTfnKhvh9yTXlTvRjfDiLMX0r5RpYuSctHWdVil0tipBrOAEF-E0hNGasuaFMhTlMLOYZs73i8YXAS8eCMPls60DEkBvpCecLwsE22Wsx89dVnybQk_icaSL7g6TZPd5CQ0Yq5l3B8k0p2RAMn6j1CLphA65SmU2A0iWl_IyYylGd1kGaaCOU5nLsjr5pEq57QTDRcO" />
+				<div class="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/95 to-primary/40"></div>
+				<div
+					class="relative h-full flex flex-col justify-center px-12 md:px-20 lg:px-32 max-w-5xl text-white py-16">
+					<h1 class="text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-6 tracking-tight">
+						Lo mejor del mundo <br />en tu puerta.
+					</h1>
+					<p class="text-lg md:text-xl text-white/90 mb-12 max-w-xl leading-relaxed">
+						Únete a miles de personas que confían en DeTodo24 para sus compras diarias con los mejores
+						precios del mercado.
+					</p>
+					<div class="flex flex-wrap gap-4">
+						<a class="bg-white text-secondary px-10 py-4 rounded-xl font-bold hover:bg-slate-100 transition-all text-base shadow-lg"
+							href="#">
+							Comprar Ahora
+						</a>
+						<a class="border-2 border-white text-white px-10 py-4 rounded-xl font-bold hover:bg-white/10 transition-all text-base"
+							href="#">
+							Ver Promociones
+						</a>
+					</div>
+				</div>
+				<button
+					class="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/40 hover:bg-black/60 rounded-full text-white flex items-center justify-center transition-all">
+					<span class="material-symbols-outlined text-2xl">chevron_left</span>
+				</button>
+				<button
+					class="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/40 hover:bg-black/60 rounded-full text-white flex items-center justify-center transition-all">
+					<span class="material-symbols-outlined text-2xl">chevron_right</span>
+				</button>
+				<div class="absolute bottom-10 right-12 flex items-center gap-2">
+					<div class="w-8 h-1.5 rounded-full bg-white"></div>
+					<div class="w-1.5 h-1.5 rounded-full bg-white/40"></div>
+					<div class="w-1.5 h-1.5 rounded-full bg-white/40"></div>
+				</div>
+			</div>
+		</section>
+		<div class="container mx-auto px-4 lg:px-8 space-y-10">
+			<section class="relative">
+				<div class="flex items-center justify-between mb-8 px-2">
+					<h3 class="text-xs font-bold text-secondary uppercase tracking-[0.25em]">TIENDAS DESTACADAS</h3>
+					<div class="flex gap-2">
+						<button
+							class="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center bg-white text-slate-400 hover:text-secondary hover:border-secondary transition-all shadow-sm">
+							<span class="material-symbols-outlined text-xl">chevron_left</span>
+						</button>
+						<button
+							class="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center bg-white text-slate-400 hover:text-secondary hover:border-secondary transition-all shadow-sm">
+							<span class="material-symbols-outlined text-xl">chevron_right</span>
+						</button>
+					</div>
+				</div>
+				<div class="flex gap-6 overflow-x-auto no-scrollbar pb-4 px-2">
+					<div class="flex-shrink-0 w-[140px] group cursor-pointer text-center">
+						<div
+							class="w-full aspect-square bg-white rounded-2xl flex items-center justify-center p-8 mb-4 product-card-shadow transition-all group-hover:shadow-md">
+							<img alt="Apple Store" class="max-w-full max-h-full object-contain"
+								src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtxwKHEG6qreZe41_7TSPZCwEot3niPl2I_4V5kdXI2KzSObYF2um4h1VRDw1BtuMoOUtBjNv0Fri5-SQFbo3wISDBNRhJ3pPInYQUCLAYIqQc21r3PFP9zGBaSTeI7ra-Zcp-M0LOawFJSCwi_zpxa3XOfgyEE9MIJ5yonf4AwFsR9LaAVVOADJkCYrzCVKnlvMfWeQQa0AZbp15_knMvmDaunJdMSexIcYb62MR9AUOb2P4N_d0hL-GVNSa8PeKwlb7RTlIgN7UV" />
+						</div>
+						<span class="text-sm font-medium text-slate-800 transition-colors">Apple Store</span>
+					</div>
+					<div class="flex-shrink-0 w-[140px] group cursor-pointer text-center">
+						<div
+							class="w-full aspect-square bg-white rounded-2xl flex items-center justify-center p-8 mb-4 product-card-shadow transition-all group-hover:shadow-md">
+							<img alt="Nike" class="max-w-full max-h-full object-contain"
+								src="https://lh3.googleusercontent.com/aida-public/AB6AXuADpiNbDwaETqu9RkE7ZI9obJ9SP4DC_u-bZThMlI8hHbLqVBiTOw441g8BoV4tY_AwZOwd1n6NL0uF25pn2I60FdZKvWMe_yuHl4Y1d7wL8ba9yxHQz5LLFo-h9hVgR-u9TDHE4FKKJQtvWR1rD7wBii1J0mCbXF_3pB5Q4oqPyLsjWof_A93kw65O3Vx54iUhUk1Gc2MiXCg6AqqafRnSxPdUxPjK49LG_33n-yJc2b1dO-g_rb-j0UNrPAK2B6khld8_mDuSgsz4" />
+						</div>
+						<span class="text-sm font-medium text-slate-800 transition-colors">Nike</span>
+					</div>
+					<div class="flex-shrink-0 w-[140px] group cursor-pointer text-center">
+						<div
+							class="w-full aspect-square bg-white rounded-2xl flex items-center justify-center p-8 mb-4 product-card-shadow transition-all group-hover:shadow-md">
+							<img alt="Samsung" class="max-w-full max-h-full object-contain"
+								src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsV9_-pXhHRjSYqf0uKVtNFDW8k-I6ubwYVkdUnMsow_NdI0dje3HatCgjbUXxFtWXOO4Y0bA418OUlw2TRuN9_U2l4z60PfeAH6mV3WYlrTJR2ylwigXOqKm51RA1aqjfstVJgPo3DMOIQbc53tg1Q2CQZyG0aKphSOqHujfofYptnT6rIsRBbyFMpHA9reZFE9hlTwg_v8Xp2ZHAT5D_J3WBAzbRPPRIMQC9xtjt2nAsuC-9BpFctrkbOfwSC0T0bsiaQF4rUKmf" />
+						</div>
+						<span class="text-sm font-medium text-slate-800 transition-colors">Samsung</span>
+					</div>
+					<div class="flex-shrink-0 w-[140px] group cursor-pointer text-center">
+						<div
+							class="w-full aspect-square bg-white rounded-2xl flex items-center justify-center p-8 mb-4 product-card-shadow transition-all group-hover:shadow-md">
+							<img alt="Adidas" class="max-w-full max-h-full object-contain"
+								src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJmDv7k4Us9mocmaqYFQF7j0Pv5VNRy02ep2kI8WC31rmFr4huy8DLudbbv7hMuS9SblcwhpGSF37Dk_3SXB9pbSdbWLxa0juz59iPB6yAErjq-lvJMIm8Reg2YysC04qoll6qJJJ0RYESjBrMfJ6u3pOG1OeyIlugoC8MGn4webtxAOjf-aP0BVm8T5q18A109XVAlE8XSFHZiLCwRLDL5FIHG_fGCVwx3xzl8r6MsK-tJkR6_he4A_r3zSlIaZh28_PM9Cqd0bxk" />
+						</div>
+						<span class="text-sm font-medium text-slate-800 transition-colors">Adidas</span>
+					</div>
+					<div class="flex-shrink-0 w-[140px] group cursor-pointer text-center">
+						<div
+							class="w-full aspect-square bg-white rounded-2xl flex items-center justify-center p-8 mb-4 product-card-shadow transition-all group-hover:shadow-md">
+							<img alt="Sony" class="max-w-full max-h-full object-contain"
+								src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4X_DgP2HgIY6uH8JFYVr0zD5fS60p046g02nYntBPwEV1a7ZriQNUVnDvLOmRmZjfksN9IEga0KUObI4a4i2vso0g2r2vC0GErEBsnKDkzIM9QicYN_rX0Q-aWUkiDFiSWZPsvx104dHpG313jYjlHTv1P9MPJk3g4vTecfbtymzs4qCrQk3DfiDI3n5HjA1wq0PFHfchORIKv6bp7q8HFRj8LK0hnoS0Q_myzibE1pcQZslCSuefhDFiV5YsEKtJrLmis7hg97v0" />
+						</div>
+						<span class="text-sm font-medium text-slate-800 transition-colors">Sony</span>
+					</div>
+					<div class="flex-shrink-0 w-[140px] group cursor-pointer text-center">
+						<div
+							class="w-full aspect-square bg-white rounded-2xl flex items-center justify-center p-8 mb-4 product-card-shadow transition-all group-hover:shadow-md">
+							<img alt="Zara" class="max-w-full max-h-full object-contain"
+								src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCXL9szgLh4Sf-Xl4YNw4PYGVzVd67M4HhI81aJFjISlOHCu6e2-WJbdvIHdbbnOBm-V6BUSTfnKhvh9yTXlTvRjfDiLMX0r5RpYuSctHWdVil0tipBrOAEF-E0hNGasuaFMhTlMLOYZs73i8YXAS8eCMPls60DEkBvpCecLwsE22Wsx89dVnybQk_icaSL7g6TZPd5CQ0Yq5l3B8k0p2RAMn6j1CLphA65SmU2A0iWl_IyYylGd1kGaaCOU5nLsjr5pEq57QTDRcO" />
+						</div>
+						<span class="text-sm font-medium text-slate-800 transition-colors">Zara</span>
+					</div>
+					<div class="flex-shrink-0 w-[140px] group cursor-pointer text-center">
+						<div
+							class="w-full aspect-square bg-white rounded-2xl flex items-center justify-center p-8 mb-4 product-card-shadow transition-all group-hover:shadow-md">
+							<img alt="Lego" class="max-w-full max-h-full object-contain"
+								src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmrj8m9jkCNxW9iWWC-VwU8KnXOOxz4GcLdUErz5uFgDStmVzqQEwSNi1hFtpqv2E_m3GNgacCpBxAs94IjQ94obQ2xBpPHKEOao1cq4icBdu4hdhCFzCoKG9rR_1eR5NVwWdND9HIz8TFfuRVtBW24xVUNEM991nG5EgIws-ad-1oxOw-zkBKlrX2pFk8eIgYHI9SCYeBNpPyl3d7NTzGQDPb0FTR-WwWLWqHDBhPn7VBPzLC9IPcCOaQu_yKHRliV141yC9zEwc0" />
+						</div>
+						<span class="text-sm font-medium text-slate-800 transition-colors">Lego</span>
+					</div>
+					<div class="flex-shrink-0 w-[140px] group cursor-pointer text-center">
+						<div
+							class="w-full aspect-square bg-white rounded-2xl flex items-center justify-center p-8 mb-4 product-card-shadow transition-all group-hover:shadow-md">
+							<img alt="Disney" class="max-w-full max-h-full object-contain"
+								src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhuaV0tXJ2nNyCG4Ai9W2Weian8swuPqrGB6e1XECULwmP4ZBWSZDdkrZ0ndMxBLFf9HmXt9MityZ7erwmGyCquEUgSuVM1LH90axJcvstlpsnsg9b4pJs26nvw-FOttL3CysjHBWfIxjD3voyUHi28HwflG1BSy60f0FHs-kaA9onxphIDJzzcVuK4k4j-ti3sVYIjyIQitlw9rawxAFtotAxw_v5P1DuJFB5NjZRv00TuT6ZxFFQjQDua_rU7gFLAm7BXax3vJo5" />
+						</div>
+						<span class="text-sm font-medium text-slate-800 transition-colors">Disney</span>
+					</div>
+				</div>
+			</section>
+			<section>
+				<div class="flex items-center justify-between mb-8 px-2">
+					<h2 class="text-2xl font-bold text-secondary">Productos Recomendados</h2>
+					<a class="text-primary font-bold hover:text-secondary transition-colors flex items-center gap-1 text-sm group"
+						href="#">
+						Ver todos <span
+							class="material-symbols-outlined text-lg transition-transform group-hover:translate-x-1">arrow_forward</span>
+					</a>
+				</div>
+				<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+					<div
+						class="bg-white rounded-[1.25rem] flex flex-col subtle-shadow overflow-hidden group hover:shadow-xl transition-all border border-transparent hover:border-slate-100">
+						<div class="relative aspect-square bg-white overflow-hidden">
+							<img alt="Wireless Noise Canceling Headphones"
+								class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+								src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyZR5vPDnOUeazrq8TYY4QgwKh32Wl6elyLu5g9Eyg0tr-V0uL8t4OkhtP6QtalpobBJDka8coha6LKE6LSFKdjvCf9EPwLj3dcmbC_1c2clEuAdlvORn_QV3jVNjo6FFsxegT4FnQzNCGU7uDDmj2KAjMB_UAEpoWAdwZtxfZ-SBOD60P_bqV5sFrGf6RJuKp1mV5Sw0xUZbkzD1CABZ1GAAd8CYeNkUpCrIs6c3JGAWYozwsD8Cb6yWdK4_YlgmrrECl8y0ZUCOy" />
+							<span
+								class="absolute top-4 left-4 bg-[#e43f3f] text-white text-[10px] font-black px-2.5 py-1 rounded-md uppercase tracking-wider">OFERTA</span>
+						</div>
+						<div class="p-5 flex-1 flex flex-col">
+							<h3 class="text-secondary font-semibold text-sm line-clamp-2 mb-2 min-h-[40px]">Wireless
+								Noise Canceling Headphones</h3>
+							<p class="text-primary font-bold text-xl mb-5">$129.99</p>
+							<button
+								class="w-full bg-primary text-white py-3 rounded-xl font-bold text-sm transition-all hover:bg-[#085a9c] active:scale-95 mt-auto">Agregar
+								al Carrito</button>
+						</div>
+					</div>
+					<div
+						class="bg-white rounded-[1.25rem] flex flex-col subtle-shadow overflow-hidden group hover:shadow-xl transition-all border border-transparent hover:border-slate-100">
+						<div class="relative aspect-square bg-white overflow-hidden">
+							<img alt="Minimalist Quartz Watch"
+								class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+								src="https://lh3.googleusercontent.com/aida-public/AB6AXuA42ppABc4hGwWZBbxUrMyaTjqq244TRzylY-WhZ4f0XVDLg_uQhnCLlCMe78NNHT3G8DGm8cuKpwd27632MyVN9Q2JKJyezWzzNwOrDkHU91vrH_lkLPk0GinsUkzJnlVdNCOvA-o1uqN0-6qvYnaOFzoZvbEhLGxStfjNI5HEBfREDGRVhOOA75Nr5zc2-GOaaRM_RakC60BXRU7qz_MeW5SEQ9XorVdeUvkS15vOnbStlAk8mepDXSt3ZThJOmx32nlyDW8SU86r" />
+						</div>
+						<div class="p-5 flex-1 flex flex-col">
+							<h3 class="text-secondary font-semibold text-sm line-clamp-2 mb-2 min-h-[40px]">Minimalist
+								Quartz Watch</h3>
+							<p class="text-primary font-bold text-xl mb-5">$85.00</p>
+							<button
+								class="w-full bg-primary text-white py-3 rounded-xl font-bold text-sm transition-all hover:bg-[#085a9c] active:scale-95 mt-auto">Agregar
+								al Carrito</button>
+						</div>
+					</div>
+					<div
+						class="bg-white rounded-[1.25rem] flex flex-col subtle-shadow overflow-hidden group hover:shadow-xl transition-all border border-transparent hover:border-slate-100">
+						<div class="relative aspect-square bg-white overflow-hidden">
+							<img alt="Polarized Urban Sunglasses"
+								class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+								src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkMqnoEiR8bzj4kWY1JIdhtf93vtZjQupD5U5HvGq2WYamw9frPcYWlGdm_wS-GszkfcCpng7yWKvv-mo8NaaKKk9Zpczce1xotV3VWB3d5vopiosPfDwN-MnIf_RfWruIEXgVHVRyvQ_aJv8D7qms_dihmpmADKfRzi2XGP9xS2hdakWGp7YcJqzGZjC5MjIjh0TXFri_f8MIqlIbVirkvuRAlkpOTssjtgYLqKhxzfk_WdD7Rwtx18sDZBXEX9irVoLFyjD4AKrf" />
+							<span
+								class="absolute top-4 left-4 bg-primary text-white text-[10px] font-black px-2.5 py-1 rounded-md uppercase tracking-wider">20%
+								OFF</span>
+						</div>
+						<div class="p-5 flex-1 flex flex-col">
+							<h3 class="text-secondary font-semibold text-sm line-clamp-2 mb-2 min-h-[40px]">Polarized
+								Urban Sunglasses</h3>
+							<p class="text-primary font-bold text-xl mb-5">$45.50</p>
+							<button
+								class="w-full bg-primary text-white py-3 rounded-xl font-bold text-sm transition-all hover:bg-[#085a9c] active:scale-95 mt-auto">Agregar
+								al Carrito</button>
+						</div>
+					</div>
+					<div
+						class="bg-white rounded-[1.25rem] flex flex-col subtle-shadow overflow-hidden group hover:shadow-xl transition-all border border-transparent hover:border-slate-100">
+						<div class="relative aspect-square bg-white overflow-hidden">
+							<img alt="Professional DSLR Camera"
+								class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+								src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCXL9szgLh4Sf-Xl4YNw4PYGVzVd67M4HhI81aJFjISlOHCu6e2-WJbdvIHdbbnOBm-V6BUSTfnKhvh9yTXlTvRjfDiLMX0r5RpYuSctHWdVil0tipBrOAEF-E0hNGasuaFMhTlMLOYZs73i8YXAS8eCMPls60DEkBvpCecLwsE22Wsx89dVnybQk_icaSL7g6TZPd5CQ0Yq5l3B8k0p2RAMn6j1CLphA65SmU2A0iWl_IyYylGd1kGaaCOU5nLsjr5pEq57QTDRcO" />
+						</div>
+						<div class="p-5 flex-1 flex flex-col">
+							<h3 class="text-secondary font-semibold text-sm line-clamp-2 mb-2 min-h-[40px]">Professional
+								DSLR Camera</h3>
+							<p class="text-primary font-bold text-xl mb-5">$1,100.00</p>
+							<button
+								class="w-full bg-primary text-white py-3 rounded-xl font-bold text-sm transition-all hover:bg-[#085a9c] active:scale-95 mt-auto">Agregar
+								al Carrito</button>
+						</div>
+					</div>
+					<div
+						class="bg-white rounded-[1.25rem] flex flex-col subtle-shadow overflow-hidden group hover:shadow-xl transition-all border border-transparent hover:border-slate-100">
+						<div class="relative aspect-square bg-white overflow-hidden">
+							<img alt="Premium Smartphone"
+								class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+								src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhuaV0tXJ2nNyCG4Ai9W2Weian8swuPqrGB6e1XECULwmP4ZBWSZDdkrZ0ndMxBLFf9HmXt9MityZ7erwmGyCquEUgSuVM1LH90axJcvstlpsnsg9b4pJs26nvw-FOttL3CysjHBWfIxjD3voyUHi28HwflG1BSy60f0FHs-kaA9onxphIDJzzcVuK4k4j-ti3sVYIjyIQitlw9rawxAFtotAxw_v5P1DuJFB5NjZRv00TuT6ZxFFQjQDua_rU7gFLAm7BXax3vJo5" />
+							<span
+								class="absolute top-4 left-4 bg-[#e43f3f] text-white text-[10px] font-black px-2.5 py-1 rounded-md uppercase tracking-wider">OFERTA</span>
+						</div>
+						<div class="p-5 flex-1 flex flex-col">
+							<h3 class="text-secondary font-semibold text-sm line-clamp-2 mb-2 min-h-[40px]">Premium
+								Smartphone</h3>
+							<p class="text-primary font-bold text-xl mb-5">$999.90</p>
+							<button
+								class="w-full bg-primary text-white py-3 rounded-xl font-bold text-sm transition-all hover:bg-[#085a9c] active:scale-95 mt-auto">Agregar
+								al Carrito</button>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="relative">
+				<div class="flex items-center justify-between mb-8">
+					<h2 class="text-2xl font-bold text-secondary">Lo que quieres, cuando lo quieres</h2>
+				</div>
+				<div class="relative group/carousel">
+					<button
+						class="absolute left-[-20px] top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-xl flex items-center justify-center z-20 text-black hover:bg-slate-50 transition-colors border border-slate-100">
+						<span class="material-symbols-outlined">chevron_left</span>
+					</button>
+					<button
+						class="absolute right-[-20px] top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-xl flex items-center justify-center z-20 text-black hover:bg-slate-50 transition-colors border border-slate-100">
+						<span class="material-symbols-outlined">chevron_right</span>
+					</button>
+					<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 overflow-hidden">
+						<a class="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-lg group block" href="#">
+							<img alt="ElectroStore"
+								class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+								src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCXL9szgLh4Sf-Xl4YNw4PYGVzVd67M4HhI81aJFjISlOHCu6e2-WJbdvIHdbbnOBm-V6BUSTfnKhvh9yTXlTvRjfDiLMX0r5RpYuSctHWdVil0tipBrOAEF-E0hNGasuaFMhTlMLOYZs73i8YXAS8eCMPls60DEkBvpCecLwsE22Wsx89dVnybQk_icaSL7g6TZPd5CQ0Yq5l3B8k0p2RAMn6j1CLphA65SmU2A0iWl_IyYylGd1kGaaCOU5nLsjr5pEq57QTDRcO" />
+							<div class="absolute inset-0 store-overlay-gradient"></div>
+							<div class="absolute bottom-8 left-8 text-white pr-4">
+								<h4 class="text-3xl font-bold mb-2 leading-tight">ElectroStore</h4>
+								<p class="text-base font-medium opacity-90">Hasta 65% Off</p>
+							</div>
+							<div
+								class="absolute top-6 left-6 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-lg text-[10px] text-white font-bold tracking-wider uppercase">
+								Lo más buscado</div>
+						</a>
+						<a class="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-lg group block" href="#">
+							<img alt="Moda Urbana"
+								class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+								src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmrj8m9jkCNxW9iWWC-VwU8KnXOOxz4GcLdUErz5uFgDStmVzqQEwSNi1hFtpqv2E_m3GNgacCpBxAs94IjQ94obQ2xBpPHKEOao1cq4icBdu4hdhCFzCoKG9rR_1eR5NVwWdND9HIz8TFfuRVtBW24xVUNEM991nG5EgIws-ad-1oxOw-zkBKlrX2pFk8eIgYHI9SCYeBNpPyl3d7NTzGQDPb0FTR-WwWLWqHDBhPn7VBPzLC9IPcCOaQu_yKHRliV141yC9zEwc0" />
+							<div class="absolute inset-0 store-overlay-gradient"></div>
+							<div class="absolute bottom-8 left-8 text-white pr-4">
+								<h4 class="text-3xl font-bold mb-2 leading-tight">Moda Urbana</h4>
+								<p class="text-base font-medium opacity-90">Colección Nueva</p>
+							</div>
+							<div
+								class="absolute top-6 left-6 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-lg text-[10px] text-white font-bold tracking-wider uppercase">
+								Premium Partner</div>
+						</a>
+						<a class="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-lg group block" href="#">
+							<img alt="SuperMarket"
+								class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+								src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhuaV0tXJ2nNyCG4Ai9W2Weian8swuPqrGB6e1XECULwmP4ZBWSZDdkrZ0ndMxBLFf9HmXt9MityZ7erwmGyCquEUgSuVM1LH90axJcvstlpsnsg9b4pJs26nvw-FOttL3CysjHBWfIxjD3voyUHi28HwflG1BSy60f0FHs-kaA9onxphIDJzzcVuK4k4j-ti3sVYIjyIQitlw9rawxAFtotAxw_v5P1DuJFB5NjZRv00TuT6ZxFFQjQDua_rU7gFLAm7BXax3vJo5" />
+							<div class="absolute inset-0 store-overlay-gradient"></div>
+							<div class="absolute bottom-8 left-8 text-white pr-4">
+								<h4 class="text-3xl font-bold mb-2 leading-tight">SuperMarket</h4>
+								<p class="text-base font-medium opacity-90">Precios Bajos Siempre</p>
+							</div>
+							<div
+								class="absolute top-6 left-6 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-lg text-[10px] text-white font-bold tracking-wider uppercase">
+								Fresh Quality</div>
+						</a>
+						<a class="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-lg group block" href="#">
+							<img alt="Aventura Pro"
+								class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+								src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkMqnoEiR8bzj4kWY1JIdhtf93vtZjQupD5U5HvGq2WYamw9frPcYWlGdm_wS-GszkfcCpng7yWKvv-mo8NaaKKk9Zpczce1xotV3VWB3d5vopiosPfDwN-MnIf_RfWruIEXgVHVRyvQ_aJv8D7qms_dihmpmADKfRzi2XGP9xS2hdakWGp7YcJqzGZjC5MjIjh0TXFri_f8MIqlIbVirkvuRAlkpOTssjtgYLqKhxzfk_WdD7Rwtx18sDZBXEX9irVoLFyjD4AKrf" />
+							<div class="absolute inset-0 store-overlay-gradient"></div>
+							<div class="absolute bottom-8 left-8 text-white pr-4">
+								<h4 class="text-3xl font-bold mb-2 leading-tight">Aventura Pro</h4>
+								<p class="text-base font-medium opacity-90">Equípate con lo Mejor</p>
+							</div>
+							<div
+								class="absolute top-6 left-6 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-lg text-[10px] text-white font-bold tracking-wider uppercase">
+								Outdoor Experts</div>
+						</a>
+					</div>
+				</div>
+			</section>
+			<section class="!mx-[-1rem] lg:!mx-[-2rem]">
+				<div
+					class="bg-primary py-4 px-4 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4 shadow-md">
+					<div class="flex items-center gap-5 flex-1">
+						<div class="bg-white/20 p-2.5 rounded-full flex shrink-0">
+							<span class="material-symbols-outlined text-white text-2xl">local_shipping</span>
+						</div>
+						<p class="text-white font-semibold text-base md:text-lg tracking-wide text-center md:text-left">
+							Envío gratis en miles de productos seleccionados
+							<span class="text-white/80 font-normal ml-3">— Por tiempo limitado</span>
+						</p>
+					</div>
+					<div class="flex items-center gap-10">
+						<a class="bg-white text-primary text-xs font-bold px-8 py-3 rounded-full hover:bg-slate-50 transition-all shadow-sm active:scale-95 uppercase tracking-wider"
+							href="#">
+							VER PRODUCTOS
+						</a>
+						<button class="text-white/70 hover:text-white transition-colors flex items-center shrink-0">
+							<span class="material-symbols-outlined text-2xl">close</span>
+						</button>
+					</div>
+				</div>
+			</section>
+			<section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+				<div
+					class="bg-white rounded-[1.25rem] flex flex-col subtle-shadow overflow-hidden group hover:shadow-xl transition-all border border-transparent hover:border-slate-100">
+					<div class="relative aspect-square bg-white overflow-hidden">
+						<img alt="Audífonos Premium Wireless"
+							class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+							src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyZR5vPDnOUeazrq8TYY4QgwKh32Wl6elyLu5g9Eyg0tr-V0uL8t4OkhtP6QtalpobBJDka8coha6LKE6LSFKdjvCf9EPwLj3dcmbC_1c2clEuAdlvORn_QV3jVNjo6FFsxegT4FnQzNCGU7uDDmj2KAjMB_UAEpoWAdwZtxfZ-SBOD60P_bqV5sFrGf6RJuKp1mV5Sw0xUZbkzD1CABZ1GAAd8CYeNkUpCrIs6c3JGAWYozwsD8Cb6yWdK4_YlgmrrECl8y0ZUCOy" />
+						<span
+							class="absolute top-4 left-4 bg-[#e43f3f] text-white text-[10px] font-black px-2.5 py-1 rounded-md uppercase tracking-wider">OFERTA</span>
+					</div>
+					<div class="p-5 flex-1 flex flex-col">
+						<h3 class="text-secondary font-semibold text-sm line-clamp-2 mb-2 min-h-[40px]">Audífonos
+							Premium Wireless Noise Cancelling</h3>
+						<p class="text-primary font-bold text-xl mb-5">$129.99</p>
+						<button
+							class="w-full bg-primary text-white py-3 rounded-xl font-bold text-sm transition-all hover:bg-[#085a9c] active:scale-95 mt-auto">Agregar
+							al Carrito</button>
+					</div>
+				</div>
+				<div
+					class="bg-white rounded-[1.25rem] flex flex-col subtle-shadow overflow-hidden group hover:shadow-xl transition-all border border-transparent hover:border-slate-100">
+					<div class="relative aspect-square bg-white overflow-hidden">
+						<img alt="Reloj Minimalista Cuarzo"
+							class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+							src="https://lh3.googleusercontent.com/aida-public/AB6AXuA42ppABc4hGwWZBbxUrMyaTjqq244TRzylY-WhZ4f0XVDLg_uQhnCLlCMe78NNHT3G8DGm8cuKpwd27632MyVN9Q2JKJyezWzzNwOrDkHU91vrH_lkLPk0GinsUkzJnlVdNCOvA-o1uqN0-6qvYnaOFzoZvbEhLGxStfjNI5HEBfREDGRVhOOA75Nr5zc2-GOaaRM_RakC60BXRU7qz_MeW5SEQ9XorVdeUvkS15vOnbStlAk8mepDXSt3ZThJOmx32nlyDW8SU86r" />
+					</div>
+					<div class="p-5 flex-1 flex flex-col">
+						<h3 class="text-secondary font-semibold text-sm line-clamp-2 mb-2 min-h-[40px]">Reloj
+							Minimalista Cuarzo Acero Inoxidable</h3>
+						<p class="text-primary font-bold text-xl mb-5">$85.00</p>
+						<button
+							class="w-full bg-primary text-white py-3 rounded-xl font-bold text-sm transition-all hover:bg-[#085a9c] active:scale-95 mt-auto">Agregar
+							al Carrito</button>
+					</div>
+				</div>
+				<div
+					class="bg-white rounded-[1.25rem] flex flex-col subtle-shadow overflow-hidden group hover:shadow-xl transition-all border border-transparent hover:border-slate-100">
+					<div class="relative aspect-square bg-white overflow-hidden">
+						<img alt="Gafas de Sol Urban"
+							class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+							src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkMqnoEiR8bzj4kWY1JIdhtf93vtZjQupD5U5HvGq2WYamw9frPcYWlGdm_wS-GszkfcCpng7yWKvv-mo8NaaKKk9Zpczce1xotV3VWB3d5vopiosPfDwN-MnIf_RfWruIEXgVHVRyvQ_aJv8D7qms_dihmpmADKfRzi2XGP9xS2hdakWGp7YcJqzGZjC5MjIjh0TXFri_f8MIqlIbVirkvuRAlkpOTssjtgYLqKhxzfk_WdD7Rwtx18sDZBXEX9irVoLFyjD4AKrf" />
+						<span
+							class="absolute top-4 left-4 bg-primary text-white text-[10px] font-black px-2.5 py-1 rounded-md uppercase tracking-wider">20%
+							OFF</span>
+					</div>
+					<div class="p-5 flex-1 flex flex-col">
+						<h3 class="text-secondary font-semibold text-sm line-clamp-2 mb-2 min-h-[40px]">Gafas de Sol
+							Urban Edition Polarizadas</h3>
+						<p class="text-primary font-bold text-xl mb-5">$45.50</p>
+						<button
+							class="w-full bg-primary text-white py-3 rounded-xl font-bold text-sm transition-all hover:bg-[#085a9c] active:scale-95 mt-auto">Agregar
+							al Carrito</button>
+					</div>
+				</div>
+				<div
+					class="bg-white rounded-[1.25rem] flex flex-col subtle-shadow overflow-hidden group hover:shadow-xl transition-all border border-transparent hover:border-slate-100">
+					<div class="relative aspect-square bg-white overflow-hidden">
+						<img alt="Tenis Running Elite Pro"
+							class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+							src="https://lh3.googleusercontent.com/aida-public/AB6AXuADpiNbDwaETqu9RkE7ZI9obJ9SP4DC_u-bZThMlI8hHbLqVBiTOw441g8BoV4tY_AwZOwd1n6NL0uF25pn2I60FdZKvWMe_yuHl4Y1d7wL8ba9yxHQz5LLFo-h9hVgR-u9TDHE4FKKJQtvWR1rD7wBii1J0mCbXF_3pB5Q4oqPyLsjWof_A93kw65O3Vx54iUhUk1Gc2MiXCg6AqqafRnSxPdUxPjK49LG_33n-yJc2b1dO-g_rb-j0UNrPAK2B6khld8_mDuSgsz4" />
+					</div>
+					<div class="p-5 flex-1 flex flex-col">
+						<h3 class="text-secondary font-semibold text-sm line-clamp-2 mb-2 min-h-[40px]">Tenis Running
+							Elite Pro Z-100</h3>
+						<p class="text-primary font-bold text-xl mb-5">$110.00</p>
+						<button
+							class="w-full bg-primary text-white py-3 rounded-xl font-bold text-sm transition-all hover:bg-[#085a9c] active:scale-95 mt-auto">Agregar
+							al Carrito</button>
+					</div>
+				</div>
+				<div
+					class="bg-white rounded-[1.25rem] flex flex-col subtle-shadow overflow-hidden group hover:shadow-xl transition-all border border-transparent hover:border-slate-100">
+					<div class="relative aspect-square bg-white overflow-hidden">
+						<img alt="Cámara Instantánea Retro"
+							class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+							src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCXL9szgLh4Sf-Xl4YNw4PYGVzVd67M4HhI81aJFjISlOHCu6e2-WJbdvIHdbbnOBm-V6BUSTfnKhvh9yTXlTvRjfDiLMX0r5RpYuSctHWdVil0tipBrOAEF-E0hNGasuaFMhTlMLOYZs73i8YXAS8eCMPls60DEkBvpCecLwsE22Wsx89dVnybQk_icaSL7g6TZPd5CQ0Yq5l3B8k0p2RAMn6j1CLphA65SmU2A0iWl_IyYylGd1kGaaCOU5nLsjr5pEq57QTDRcO" />
+						<span
+							class="absolute top-4 left-4 bg-[#e43f3f] text-white text-[10px] font-black px-2.5 py-1 rounded-md uppercase tracking-wider">OFERTA</span>
+					</div>
+					<div class="p-5 flex-1 flex flex-col">
+						<h3 class="text-secondary font-semibold text-sm line-clamp-2 mb-2 min-h-[40px]">Cámara
+							Instantánea Retro Cam V2</h3>
+						<p class="text-primary font-bold text-xl mb-5">$99.90</p>
+						<button
+							class="w-full bg-primary text-white py-3 rounded-xl font-bold text-sm transition-all hover:bg-[#085a9c] active:scale-95 mt-auto">Agregar
+							al Carrito</button>
+					</div>
+				</div>
+			</section>
+			<section class="flex flex-col items-center py-12">
+				<button
+					class="bg-primary hover:bg-secondary text-white font-bold py-4 px-14 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl active:scale-95 uppercase tracking-widest text-sm">
+					CARGAR MÁS
+				</button>
+			</section>
+			<section class="space-y-8">
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+					<a class="relative aspect-[16/9] rounded-2xl overflow-hidden shadow-lg group block" href="#">
+						<img alt="ElectroStore"
+							class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+							src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCXL9szgLh4Sf-Xl4YNw4PYGVzVd67M4HhI81aJFjISlOHCu6e2-WJbdvIHdbbnOBm-V6BUSTfnKhvh9yTXlTvRjfDiLMX0r5RpYuSctHWdVil0tipBrOAEF-E0hNGasuaFMhTlMLOYZs73i8YXAS8eCMPls60DEkBvpCecLwsE22Wsx89dVnybQk_icaSL7g6TZPd5CQ0Yq5l3B8k0p2RAMn6j1CLphA65SmU2A0iWl_IyYylGd1kGaaCOU5nLsjr5pEq57QTDRcO" />
+						<div class="absolute inset-0 store-overlay-gradient"></div>
+						<div class="absolute bottom-6 left-6 text-white pr-4">
+							<h4 class="text-2xl font-bold mb-1 leading-tight">ElectroStore</h4>
+							<p class="text-sm font-medium opacity-90">Hasta 65% Off</p>
+						</div>
+						<div
+							class="absolute top-4 left-4 bg-white/10 backdrop-blur-md px-3 py-1 rounded-lg text-[9px] text-white font-bold tracking-wider uppercase">
+							Lo más buscado</div>
+					</a>
+					<a class="relative aspect-[16/9] rounded-2xl overflow-hidden shadow-lg group block" href="#">
+						<img alt="Moda Urbana"
+							class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+							src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmrj8m9jkCNxW9iWWC-VwU8KnXOOxz4GcLdUErz5uFgDStmVzqQEwSNi1hFtpqv2E_m3GNgacCpBxAs94IjQ94obQ2xBpPHKEOao1cq4icBdu4hdhCFzCoKG9rR_1eR5NVwWdND9HIz8TFfuRVtBW24xVUNEM991nG5EgIws-ad-1oxOw-zkBKlrX2pFk8eIgYHI9SCYeBNpPyl3d7NTzGQDPb0FTR-WwWLWqHDBhPn7VBPzLC9IPcCOaQu_yKHRliV141yC9zEwc0" />
+						<div class="absolute inset-0 store-overlay-gradient"></div>
+						<div class="absolute bottom-6 left-6 text-white pr-4">
+							<h4 class="text-2xl font-bold mb-1 leading-tight">Moda Urbana</h4>
+							<p class="text-sm font-medium opacity-90">Colección Nueva</p>
+						</div>
+						<div
+							class="absolute top-4 left-4 bg-white/10 backdrop-blur-md px-3 py-1 rounded-lg text-[9px] text-white font-bold tracking-wider uppercase">
+							Premium Partner</div>
+					</a>
+					<a class="relative aspect-[16/9] rounded-2xl overflow-hidden shadow-lg group block" href="#">
+						<img alt="SuperMarket"
+							class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+							src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhuaV0tXJ2nNyCG4Ai9W2Weian8swuPqrGB6e1XECULwmP4ZBWSZDdkrZ0ndMxBLFf9HmXt9MityZ7erwmGyCquEUgSuVM1LH90axJcvstlpsnsg9b4pJs26nvw-FOttL3CysjHBWfIxjD3voyUHi28HwflG1BSy60f0FHs-kaA9onxphIDJzzcVuK4k4j-ti3sVYIjyIQitlw9rawxAFtotAxw_v5P1DuJFB5NjZRv00TuT6ZxFFQjQDua_rU7gFLAm7BXax3vJo5" />
+						<div class="absolute inset-0 store-overlay-gradient"></div>
+						<div class="absolute bottom-6 left-6 text-white pr-4">
+							<h4 class="text-2xl font-bold mb-1 leading-tight">SuperMarket</h4>
+							<p class="text-sm font-medium opacity-90">Precios Bajos Siempre</p>
+						</div>
+						<div
+							class="absolute top-4 left-4 bg-white/10 backdrop-blur-md px-3 py-1 rounded-lg text-[9px] text-white font-bold tracking-wider uppercase">
+							Fresh Quality</div>
+					</a>
+				</div>
+				<div
+					class="bg-brand-orange rounded-3xl py-4 px-8 md:px-12 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl w-full">
+					<div class="flex items-center gap-5 shrink-0">
+						<div class="bg-white/20 p-2.5 rounded-full flex">
+							<span class="material-symbols-outlined text-white text-2xl">credit_card</span>
+						</div>
+					</div>
+					<p class="text-white font-bold text-lg md:text-xl tracking-tight text-center flex-1">
+						Aprovecha nuestras ofertas bancarias — Hasta 12 cuotas sin interés
+					</p>
+					<div class="flex items-center gap-10 shrink-0">
+						<a class="bg-white text-brand-orange text-xs font-bold px-8 py-3 rounded-full hover:bg-slate-50 transition-all shadow-sm active:scale-95 uppercase tracking-wider"
+							href="#">
+							SABER MÁS
+						</a>
+						<button class="text-white/70 hover:text-white transition-colors flex items-center">
+							<span class="material-symbols-outlined text-2xl">close</span>
+						</button>
+					</div>
+				</div>
+			</section>
+		</div>
+	</main>
+	<footer class="bg-secondary text-white/80 border-t border-white/10">
+		<div class="container mx-auto px-4 lg:px-8 py-20">
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-12">
+				<div>
+					<h4 class="text-white font-bold text-xl mb-8">Sobre Nosotros</h4>
+					<ul class="space-y-4 text-sm">
+						<li><a class="hover:text-white transition-colors" href="#">Acerca de DeTodo</a></li>
+						<li><a class="hover:text-white transition-colors" href="#">Contáctanos</a></li>
+					</ul>
+				</div>
+				<div>
+					<h4 class="text-white font-bold text-xl mb-8">Atención al Cliente</h4>
+					<ul class="space-y-4 text-sm">
+						<li><a class="hover:text-white transition-colors" href="#">Términos y Condiciones</a></li>
+						<li><a class="hover:text-white transition-colors" href="#">Políticas de Privacidad</a></li>
+					</ul>
+				</div>
+				<div>
+					<h4 class="text-white font-bold text-xl mb-8">Ayuda</h4>
+					<ul class="space-y-4 text-sm">
+						<li><a class="hover:text-white transition-colors" href="#">Preguntas Frecuentes</a></li>
+						<li><a class="hover:text-white transition-colors" href="#">Cómo calcular tu envío</a></li>
+						<li><a class="hover:text-white transition-colors" href="#">Asóciate con DeTodo24</a></li>
+						<li><a class="hover:text-white transition-colors" href="#">Rastrea tu paquete</a></li>
+						<li><a class="hover:text-white transition-colors" href="#">Cómo realizar tu pedido</a></li>
+					</ul>
+				</div>
+				<div class="flex flex-col">
+					<h4 class="text-white font-bold text-xl mb-8">Descarga</h4>
+					<div class="space-y-2 mb-8 text-sm">
+						<p>Tu experiencia de compra completa.</p>
+						<p>Disponible para todos los dispositivos.</p>
+						<p class="font-light italic">¡Descárgala ahora!</p>
+					</div>
+					<div class="flex flex-col gap-4 mb-10">
+						<a class="bg-black/40 hover:bg-black/60 border border-white/10 rounded-xl px-5 py-2.5 flex items-center gap-4 transition-all max-w-[200px]"
+							href="#">
+							<svg class="w-7 h-7 fill-white" viewBox="0 0 512 512">
+								<path
+									d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l236.6-236.6L47 0zm396.6 227.3c27.9 16 43.1 34.1 43.1 54.7s-15.1 38.7-43 54.7l-94.7-54.7 94.6-54.7zM325.3 277.7L410.5 363 104.6 499l220.7-221.3z">
+								</path>
+							</svg>
+							<div class="text-left">
+								<p class="text-[10px] uppercase leading-none opacity-70">Android app on</p>
+								<p class="text-base font-bold leading-none mt-1.5">Google Play</p>
+							</div>
+						</a>
+						<a class="bg-black/40 hover:bg-black/60 border border-white/10 rounded-xl px-5 py-2.5 flex items-center gap-4 transition-all max-w-[200px]"
+							href="#">
+							<svg class="w-7 h-7 fill-white" viewBox="0 0 384 512">
+								<path
+									d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z">
+								</path>
+							</svg>
+							<div class="text-left">
+								<p class="text-[10px] uppercase leading-none opacity-70">Download on the</p>
+								<p class="text-base font-bold leading-none mt-1.5">App Store</p>
+							</div>
+						</a>
+					</div>
+					<h5 class="text-white font-bold text-sm mb-5">Contactar a DeTodo24</h5>
+					<div class="flex gap-5">
+						<a class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary hover:text-white transition-all"
+							href="#">
+							<svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+								<path
+									d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z">
+								</path>
+							</svg>
+						</a>
+						<a class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary hover:text-white transition-all"
+							href="#">
+							<svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+								<path
+									d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z">
+								</path>
+							</svg>
+						</a>
+						<a class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary hover:text-white transition-all"
+							href="#">
+							<svg class="w-5 h-5 fill-current" viewBox="0 0 1200 1227">
+								<path
+									d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z">
+								</path>
+							</svg>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="mt-20 pt-10 border-t border-white/5 text-center">
+				<p class="text-xs text-white/40 font-medium tracking-wide">© 2024 DeTodo24. Todos los derechos
+					reservados. Tu tienda de confianza.</p>
+			</div>
+		</div>
+	</footer>
+
+</body>
+
+</html>

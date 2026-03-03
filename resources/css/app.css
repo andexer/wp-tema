@@ -8,7 +8,7 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Re-assign Flux's gray of choice... */
+/* ── Flux gray reassignment ── */
 @theme {
     --color-zinc-50: var(--color-neutral-50);
     --color-zinc-100: var(--color-neutral-100);
@@ -23,10 +23,15 @@
     --color-zinc-950: var(--color-neutral-950);
 }
 
+/* ── DeTodo24 Brand Colors ── */
 @theme {
-    --color-accent: var(--color-orange-500);
-    --color-accent-content: var(--color-orange-600);
+    --color-accent: #F26522;
+    --color-accent-content: #D14D15;
     --color-accent-foreground: var(--color-white);
+    --color-primary: #F26522;
+    --color-secondary: #00063d;
+    --color-brand-orange: #f26419;
+    --color-background-light: #ebebeb;
 }
 
 @layer theme {
@@ -34,5 +39,43 @@
         --color-accent: var(--color-orange-400);
         --color-accent-content: var(--color-orange-400);
         --color-accent-foreground: var(--color-orange-950);
+    }
+}
+
+/* ── DeTodo24 Custom Utilities ── */
+@layer base {
+    body {
+        @apply bg-background-light text-slate-900 antialiased;
+    }
+}
+
+@layer utilities {
+    .hero-gradient {
+        background: linear-gradient(90deg, #00063d 0%, rgba(0, 6, 61, 0.95) 40%, rgba(242, 101, 34, 0.4) 100%);
+    }
+
+    .promo-gradient {
+        background: linear-gradient(135deg, #F26522 0%, #D14D15 100%);
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .product-card-shadow {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .subtle-shadow {
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    }
+
+    .store-overlay-gradient {
+        background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
     }
 }

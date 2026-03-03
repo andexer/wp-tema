@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>DeTodo24 - Mobile</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#F26522",
+                        "background-light": "#F3F4F6",
+                        "background-dark": "#0A0A1F",
+                        "navy-custom": "#050529",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "12px",
+                    },
+                },
+            },
+        };
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .glass-card { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(8px); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen pb-20">
+<header class="sticky top-0 z-50 bg-white dark:bg-navy-custom shadow-sm">
+<div class="px-4 py-3 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-icons-round text-xl">shopping_bag</span>
+</div>
+<span class="font-extrabold text-xl tracking-tight text-navy-custom dark:text-white">DeTodo24</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-icons-round text-2xl">shopping_cart</span>
+<span class="absolute -top-1 -right-1 bg-primary text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">3</span>
+</div>
+<span class="material-icons-round text-2xl">person_outline</span>
+</div>
+</div>
+<div class="px-4 pb-3">
+<div class="relative">
+<input class="w-full h-10 pl-10 pr-4 rounded-full bg-slate-100 dark:bg-slate-800 border-none focus:ring-2 focus:ring-primary text-sm" placeholder="Busca productos, marcas y más..." type="text"/>
+<span class="material-icons-round absolute left-3 top-2.5 text-slate-400 text-sm leading-none">search</span>
+</div>
+</div>
+<div class="bg-navy-custom overflow-x-auto hide-scrollbar flex items-center gap-6 px-4 py-2 text-xs font-medium text-slate-300">
+<span class="bg-primary text-white px-3 py-1 rounded-full whitespace-nowrap">Vestuario</span>
+<span class="whitespace-nowrap">Belleza</span>
+<span class="whitespace-nowrap">Hogar</span>
+<span class="whitespace-nowrap">Juguetes</span>
+<span class="whitespace-nowrap">Tecnología</span>
+<span class="whitespace-nowrap">Deportes</span>
+<span class="whitespace-nowrap">Supermercado</span>
+</div>
+</header>
+<main class="space-y-6 pt-2">
+<section class="px-4">
+<div class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-navy-custom to-blue-900 aspect-[16/10] flex flex-col justify-center p-6 text-white">
+<h1 class="text-2xl font-extrabold leading-tight mb-2">Lo mejor del mundo en tu puerta.</h1>
+<p class="text-[11px] text-slate-300 mb-6 max-w-[200px]">Únete a miles de personas que confían en DeTodo24 para sus compras diarias.</p>
+<div class="flex gap-2">
+<button class="bg-primary px-4 py-2 rounded-lg text-xs font-bold">Comprar Ahora</button>
+<button class="border border-white/30 px-4 py-2 rounded-lg text-xs font-bold">Ver Promociones</button>
+</div>
+<div class="absolute bottom-4 right-6 flex gap-1">
+<div class="w-4 h-1.5 bg-primary rounded-full"></div>
+<div class="w-1.5 h-1.5 bg-white/30 rounded-full"></div>
+</div>
+</div>
+</section>
+<section>
+<div class="px-4 flex justify-between items-center mb-3">
+<h2 class="text-xs font-bold uppercase tracking-wider text-slate-500">Tiendas Destacadas</h2>
+<div class="flex gap-1">
+<button class="w-6 h-6 rounded-full border border-slate-200 dark:border-slate-700 flex items-center justify-center"><span class="material-icons-round text-sm">chevron_left</span></button>
+<button class="w-6 h-6 rounded-full border border-slate-200 dark:border-slate-700 flex items-center justify-center"><span class="material-icons-round text-sm">chevron_right</span></button>
+</div>
+</div>
+<div class="flex overflow-x-auto hide-scrollbar gap-4 px-4">
+<div class="flex-shrink-0 text-center space-y-2">
+<div class="w-16 h-16 bg-white dark:bg-slate-800 rounded-xl shadow-sm flex items-center justify-center border border-slate-100 dark:border-slate-700">
+<img alt="Apple logo" class="w-8 h-8 opacity-70" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSquqY7uMeqEMFbMb-juRZC47e_MfvjbDEXfNk6sUO2uE9vLFAXwEZZkPQpXyE8P5FPpPNbanIl3DGVw5fTFcNjtHkIj_-0PwNxgpNgBy10L7G1ezArKr1b22Db6XIv1Csvf0hk8sJhVx29IjtCd-xLhWnFBazD8RuiI1wF3xA7-TUCzGzE9Xt8TrjV_pQ53zxI3xmhqixGCW-rYQmm78O0U7f8_f1U1JwlWuHakWqejSfXbYzyEU50t7luwnONWk99FTiRjEr"/>
+</div>
+<p class="text-[10px] font-medium">Apple</p>
+</div>
+<div class="flex-shrink-0 text-center space-y-2">
+<div class="w-16 h-16 bg-white dark:bg-slate-800 rounded-xl shadow-sm flex items-center justify-center border border-slate-100 dark:border-slate-700">
+<img alt="Nike logo" class="w-10 opacity-70" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjtN6iHgSk5hLjEGybTRNGO25hbjxBuEBv6-bJX6_7tHgG5RW0RIsPNAwmiT9ESzpTYkmoYwxIwd_zRNOtzdtyEfhTUClRZmH3NdhRQG-GvjAml-h1pTsVXQFLYBl8vg8PzpPhYSpBusu5OUKU2cvubfBjOx_d8PzXBXl_XGi-W-aRA8p6lgqHahzJfdlUoQttUb1HOhJ2DEgVxYKpxth_h6K4_gafLAnmGO_ZdAbVtzM1iZH9q6ek2Bou-O1IMeD9YfqcD3dN"/>
+</div>
+<p class="text-[10px] font-medium">Nike</p>
+</div>
+<div class="flex-shrink-0 text-center space-y-2">
+<div class="w-16 h-16 bg-white dark:bg-slate-800 rounded-xl shadow-sm flex items-center justify-center border border-slate-100 dark:border-slate-700">
+<img alt="Samsung logo" class="w-10 opacity-70" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCZ8FK8sfUkWD6uVZAQm_IL7T58tNudPnwA77ZHSmMYLyusrGBufNo-yER1A4DtK7CwbthD_qPObydS4FGl0W2h1rLCNlUp6kmnBNuZ0wwNnGFh08XuUZSDfUp_O13vvzHRBtaCe-h12Kn25LGTPpG5EXf3oh9IsoTi1AZqRKKaHhdh9aEX8zZ8pN3SOTZrX7G65NjgAQvoNcK8ybHrCVoKMoWJi73aCf80-J61aA-6kYwzI2OmS8TscC3Djl3YjR79B0Tibwo"/>
+</div>
+<p class="text-[10px] font-medium">Samsung</p>
+</div>
+<div class="flex-shrink-0 text-center space-y-2">
+<div class="w-16 h-16 bg-white dark:bg-slate-800 rounded-xl shadow-sm flex items-center justify-center border border-slate-100 dark:border-slate-700">
+<img alt="Adidas logo" class="w-8 opacity-70" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDT9HX2n_35kZZ2aJUSjnS2tCcy7gbjbyKyNGpXeEFUqxhQfQUURG9SjWsS1IVrcrUqR8bKip149k2zLrdncpdaxD6hrXjXZxfXgHck7rMRASJ6ALshgVV280cGvs51I51bfok3JLiT0Tz__mb7cLqQC3tlwf-rZy5pd9gN4rL5hfC7fWnQTN6Bf63OoF2JVXCXJEmHuSxWgJV7tqBC8nxblosHm_PvQqi5bsBtUmK__SOXKbhy-jJBKDP7CO5Mh54g9t-gfpA3"/>
+</div>
+<p class="text-[10px] font-medium">Adidas</p>
+</div>
+<div class="flex-shrink-0 text-center space-y-2">
+<div class="w-16 h-16 bg-white dark:bg-slate-800 rounded-xl shadow-sm flex items-center justify-center border border-slate-100 dark:border-slate-700">
+<img alt="Sony logo" class="w-10 opacity-70" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-zLdOIavy_7l-48H_pZeJENmLCgZ63nuUYckTVAcOh6jwylFM26LpF_2KQtNfJe9DitmH99qt386f24J-5qDMnb2YoioiBoH6izB9dtcIbM5YAu5mrywbVQjb-q8hWyQChMIm-X6bBoMZP_O4p8j6l4ucpseXn-6Un207OOz-60x-G8kGomqGkmoKb-HdbpRIeD_slQpHQywcIAuZ4PjZg1pZRv6TPqVv_wwj3o-68DWx4kC0o_Jmct5L_3Gub5SkQy7NlGat"/>
+</div>
+<p class="text-[10px] font-medium">Sony</p>
+</div>
+</div>
+</section>
+<section class="px-4">
+<div class="flex justify-between items-center mb-4">
+<h2 class="text-lg font-bold">Productos Recomendados</h2>
+<a class="text-primary text-xs font-semibold flex items-center gap-1" href="#">Ver todos <span class="material-icons-round text-sm">east</span></a>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-700">
+<div class="relative aspect-square bg-slate-50 dark:bg-slate-900">
+<img alt="Wireless Noise Canceling Headphones" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiCu8NdBCQ-0LP9PFMW3UR1p-CFJHFSyWwP5lq8FhWxiksydImugNswqeVInFiKkh_zkzY-1v6ocUCNqlnqC5YO-rzIkdGSJbDiUHdBsttNLYubD6xBrWymaLtumEg__-qNL3FY2rQm3MVOf-OYFrTAoRKtnuVBNgtB11ZM0U7invcfFE9GAAqs5aR4T9gHZnDHWf-PAPecT6dE7LhKxiH3exICWYN9HrXO7XLsjuWEJRxxXwfo7jeSD2Kd21ndIym0jIag2vn"/>
+<span class="absolute top-2 left-2 bg-primary text-white text-[9px] px-2 py-0.5 font-bold rounded uppercase">Oferta</span>
+</div>
+<div class="p-3">
+<h3 class="text-[11px] font-medium leading-tight mb-2 line-clamp-2 h-8">Wireless Noise Canceling Headphones</h3>
+<p class="text-sm font-bold mb-3">$129.99</p>
+<button class="w-full bg-primary text-white text-[10px] font-bold py-2 rounded-lg flex items-center justify-center gap-1">
+<span class="material-icons-round text-sm">shopping_cart</span> Agregar
+                        </button>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-700">
+<div class="relative aspect-square bg-slate-50 dark:bg-slate-900">
+<img alt="Minimalist Quartz Watch" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCO1ufZSZxe8MADR0gUSeUvDZZKxbNCTTS35llIULBIeHej3RwMTB1lh_VhR5xCTTuwp_t0BZ1xJNyL7p_yF7y8OdW8UYQ_crOXI8t1hOwex3C3n0D4sNo6nAjiTUWVmjHS1ydMkHjBqBwx3D7PbZaFm4fpbFLUAzxWaj81DDD7hzVhwP3SUI46v-niqU1WMkYhjEe5vUChAJP6WOL8kIE9YuRlkD1Sk3Au4ibZX0Fzeq38O29wIQuK5_2yX5LZ8g7Ongc3ZwJ2"/>
+</div>
+<div class="p-3">
+<h3 class="text-[11px] font-medium leading-tight mb-2 line-clamp-2 h-8">Minimalist Quartz Watch</h3>
+<p class="text-sm font-bold mb-3">$85.00</p>
+<button class="w-full bg-primary text-white text-[10px] font-bold py-2 rounded-lg flex items-center justify-center gap-1">
+<span class="material-icons-round text-sm">shopping_cart</span> Agregar
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<section class="space-y-4">
+<h2 class="px-4 text-lg font-bold">Lo que quieres, cuando lo quieres</h2>
+<div class="flex overflow-x-auto hide-scrollbar gap-3 px-4">
+<div class="relative flex-shrink-0 w-64 aspect-[3/4] rounded-2xl overflow-hidden group">
+<img alt="ElectroStore interior" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7df3nRtB7EJymQ1quXtI7MnJHwTzaIbYa_cnGsXqwyriliemMUPt8z5ZYatJIS80Byfe3-lUadGPQNgaiQ6yTUXhkwu_vFlG3fFV48m3s9Ou5glrPaVRSgeqb1-XsjqafTVlrUdwf7-JMV0PEX5FmMPxC-s8iSqr2ypGWEjz5EO7Q0uVebPXb_mYTIAwIvFLJ42IeJsxZY0nc5mcaiJwN1ivOpJ8_ElHhwflUscLNlfFybXpzWQyFcYHYQQsdR236UZoGDz71"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-5 flex flex-col justify-end">
+<span class="bg-yellow-400 text-black text-[9px] font-bold px-2 py-0.5 rounded self-start mb-2 uppercase">Lo más buscado</span>
+<h3 class="text-xl font-extrabold text-white">ElectroStore</h3>
+<p class="text-xs text-slate-300">Hasta 65% Off</p>
+</div>
+</div>
+<div class="relative flex-shrink-0 w-64 aspect-[3/4] rounded-2xl overflow-hidden group">
+<img alt="Moda Urbana fashion" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHXTCs5AOn3HOdPnpvUJlXUUz1NlDR86PWrVLSPS2Oq1bo0CTA9_aTj8G-BZK06n-wr6CQ2VxTOnfGaSUYSsG78i-thhlFII-CyVNgVKyask8XB-XEow6hyZXGa1n1DQj15o9c6yzWrIOmIqNXs4gQyPbEDZxBlG_rf1rQ5xi11t03hV0NT3PvYuU5fJ3AjF6AZNKPrwKGzkIC5BeQKso4YngFj2Xs_MjSxoNgSLnHfzVWZuN4i9GXrzP77wrXcmIQtiL3RYuN"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-5 flex flex-col justify-end">
+<span class="bg-orange-500 text-white text-[9px] font-bold px-2 py-0.5 rounded self-start mb-2 uppercase">Premium Partner</span>
+<h3 class="text-xl font-extrabold text-white">Moda Urbana</h3>
+<p class="text-xs text-slate-300">Colección Nueva</p>
+</div>
+</div>
+</div>
+</section>
+<section class="px-4">
+<div class="bg-navy-custom rounded-2xl p-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white">
+<span class="material-icons-round">local_shipping</span>
+</div>
+<div>
+<p class="text-white text-xs font-bold leading-tight">Envío gratis en miles de productos</p>
+<p class="text-slate-400 text-[10px]">Por tiempo limitado</p>
+</div>
+</div>
+<button class="bg-primary text-white text-[10px] font-bold px-3 py-1.5 rounded-lg whitespace-nowrap uppercase">Ver productos</button>
+</div>
+</section>
+<section class="px-4">
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-700">
+<div class="relative aspect-square bg-slate-50 dark:bg-slate-900">
+<img alt="Polarized Urban Sunglasses" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-DW_5HIJzAmMPMIIup1gGCB1G_-JdPjNO0ptkzYxNqBuS1EFDf0tcaGRO-rqRGvR82ZeYqI4xexTCGpy7gXVmYlzksX81GRyHlh6TvrXePc4dAjM-AcIl8dCT9O8Z8JbCsnm8HixQPR0PVX3O_93bp-qUioRATyqkvygd0CCC-RqpZO6-5uPqyV3--JKsJfAa8kBbX53cKqdInnt-FLxeCoYHh69CqqqBExDMMvbU15he4ws8hip7VNEOIqvgrTzkSZIoGOft"/>
+<span class="absolute top-2 left-2 bg-navy-custom text-white text-[9px] px-2 py-0.5 font-bold rounded uppercase">20% Off</span>
+</div>
+<div class="p-3">
+<h3 class="text-[11px] font-medium leading-tight mb-2 line-clamp-2 h-8">Gafas de Sol Urban Edition</h3>
+<p class="text-sm font-bold mb-3">$45.50</p>
+<button class="w-full bg-primary text-white text-[10px] font-bold py-2 rounded-lg">Agregar al Carrito</button>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-700">
+<div class="relative aspect-square bg-slate-50 dark:bg-slate-900">
+<img alt="Nike Running Shoe" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsKAB3Sz8qeXBDlbDlxMl0s4Mnbj35CmWwgJcF_RND9nsXHGLZtHPQqtO_g61g3LZVVvY_8qVfFYYcuke7uFkBd3iFyYlrnZytRSn-w302zU89IRBOss_1xgsZWVJYOyQkN3YlRF6LcP-IQy6tJmNaxNwxKR0WUDWGd6WoCmb1f6szMINlPFZ33A0qI3wwfyiCdYreDAQsHKycWvOKmNfa1RZ9ru_vtfImKR45lj5vUMdOBxPGOMIsH8GvhAkz9W4mINTPnHnE"/>
+</div>
+<div class="p-3">
+<h3 class="text-[11px] font-medium leading-tight mb-2 line-clamp-2 h-8">Tenis Running Elite Pro Z-100</h3>
+<p class="text-sm font-bold mb-3">$110.00</p>
+<button class="w-full bg-primary text-white text-[10px] font-bold py-2 rounded-lg">Agregar al Carrito</button>
+</div>
+</div>
+</div>
+<div class="mt-6 flex justify-center">
+<button class="bg-primary text-white px-10 py-3 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg shadow-primary/20">Cargar Más</button>
+</div>
+</section>
+<section class="px-4 pb-4">
+<div class="grid grid-cols-1 gap-4">
+<div class="relative h-32 rounded-2xl overflow-hidden shadow-lg">
+<img alt="Supermarket fresh goods" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2BphhsImUW_8nURlyw58tTQckA8tj4fh0J3VxP0v7RVmaVDCM1RmJk7bh1lusrhf04jggUjO1IHWny_SZmaARbtlLsviaR2lazcpbN2B4g3f8Mh74oeW843YLlylCrOH7syNPqdZYdzZgizHmirxab53yQKOntrVCCo5YOJvISDl-NIheGvIVtWppHqp3FKjo0bFzB8Pv4HyiI4DnG91SQTmQBhLpO3XfQnldHxUreiAUuG6uhSxwaI_Y6Cfwl6RZoAFBa2dA"/>
+<div class="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent flex flex-col justify-center p-6">
+<span class="bg-white/20 backdrop-blur-md text-white text-[9px] font-bold px-2 py-0.5 rounded self-start mb-1 uppercase">Fresh Quality</span>
+<h3 class="text-xl font-extrabold text-white">SuperMarket</h3>
+<p class="text-[10px] text-slate-300">Precios Bajos Siempre</p>
+</div>
+</div>
+</div>
+</section>
+<section class="px-4">
+<div class="bg-primary rounded-2xl p-4 flex items-center gap-4 relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 text-white/10">
+<span class="material-icons-round text-8xl">credit_card</span>
+</div>
+<div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-white shrink-0">
+<span class="material-icons-round">account_balance_wallet</span>
+</div>
+<div class="flex-1">
+<p class="text-white text-[11px] font-bold leading-tight">Aprovecha nuestras ofertas bancarias — Hasta 12 cuotas sin interés</p>
+</div>
+<button class="bg-white text-primary text-[10px] font-extrabold px-4 py-2 rounded-full whitespace-nowrap shadow-sm relative z-10 uppercase">Saber Más</button>
+</div>
+</section>
+<footer class="bg-navy-custom pt-10 pb-20 px-6">
+<div class="space-y-8">
+<div>
+<h3 class="text-white font-bold mb-4 flex justify-between items-center">Sobre Nosotros <span class="material-icons-round text-lg text-slate-500">add</span></h3>
+<div class="space-y-2 text-slate-400 text-xs">
+<p>Acerca de DeTodo</p>
+<p>Contáctanos</p>
+</div>
+</div>
+<div>
+<h3 class="text-white font-bold mb-4 flex justify-between items-center">Ayuda <span class="material-icons-round text-lg text-slate-500">add</span></h3>
+<div class="space-y-2 text-slate-400 text-xs">
+<p>Preguntas Frecuentes</p>
+<p>Rastrea tu paquete</p>
+<p>Cómo realizar tu pedido</p>
+</div>
+</div>
+<div>
+<h3 class="text-white font-bold mb-4">Descarga</h3>
+<p class="text-slate-400 text-xs mb-4">Tu experiencia de compra completa. Disponible para todos los dispositivos.</p>
+<div class="flex flex-col gap-3">
+<button class="bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-2 flex items-center gap-3">
+<img alt="Get it on Google Play" class="h-8" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJneXVyiOpVvYtbpmra9cBN4Llt-zwqbf9scvTg8nNkXGaGrSmR8mRFVFPluwvktLG-SEyU6f5Ftoke_FVef2Ui4ZojDiVIwB13QMVzQhc-2Q0dSyLcwdt-dCEfLA7M1O08m-vBTNHb6-57NyTvZcnXWTPZTq7IUqs4WsiChKue2Dnqhi9IM1sDri_vXBRZlvVlOpRWzRtbgt5I_ZHUN6dADU24sscEXfqt1r-MyQ8P8ZdSH-gGdVQZ5zMTK25Mqol4qIl6smG"/>
+</button>
+<button class="bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-2 flex items-center gap-3">
+<img alt="Download on the App Store" class="h-8" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBs3Cvn6hxxDNlz0GWqVLwOxJ06ibfqHdsdnR0h1LyOa8zXtmuRvP4ATfShn46I1hR8tLJGYJCkgq4ABTdcwEcnREqRR3Kt3ituAvSsjLz4A72cY_hST6gjPsvRB7Ql3-x2McSbbyIjlCPwZ0u5ZtFVItCTq-W5WjZU58i1Z6OKDDYqxDSMZkLkNACGv9OUcb1xQ_jf1_r_uBCSchlMNfqUjl3ioukA7iyrtYDjv8CIos8g2SfhEVON_GWvPCeAhpiXH4iVqTzm"/>
+</button>
+</div>
+</div>
+<div class="flex flex-col items-center gap-6 pt-6 border-t border-slate-800">
+<div class="flex gap-6 text-slate-400">
+<span class="material-icons-round">camera_alt</span>
+<span class="material-icons-round">facebook</span>
+<span class="material-icons-round">alternate_email</span>
+</div>
+<p class="text-[10px] text-slate-500">© 2024 DeTodo24. Todos los derechos reservados.</p>
+</div>
+</div>
+</footer>
+</main>
+<nav class="fixed bottom-0 left-0 right-0 bg-white dark:bg-navy-custom border-t border-slate-100 dark:border-slate-800 px-6 py-2 flex justify-between items-center z-[60]">
+<div class="flex flex-col items-center gap-1 text-primary">
+<span class="material-icons-round text-2xl">home</span>
+<span class="text-[9px] font-bold">Inicio</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-icons-round text-2xl">grid_view</span>
+<span class="text-[9px] font-medium">Categorías</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-icons-round text-2xl">favorite_border</span>
+<span class="text-[9px] font-medium">Favoritos</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-icons-round text-2xl">local_mall</span>
+<span class="text-[9px] font-medium">Mis Pedidos</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-icons-round text-2xl">person_outline</span>
+<span class="text-[9px] font-medium">Perfil</span>
+</div>
+</nav>
+
+</body></html>

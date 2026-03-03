@@ -17,7 +17,6 @@ new class extends Component
     {
         if ($this->productId && function_exists('WC')) {
             WC()->cart->add_to_cart($this->productId);
-            $this->cartCount = WC()->cart->get_cart_contents_count();
             $this->dispatch('cart-updated');
         }
     }

@@ -13,7 +13,6 @@ new class extends Component
         $this->title = $title;
         $this->aspectRatio = $aspectRatio;
 
-        // Puede cargar desde custom post type o ACF
         if (empty($this->stores)) {
             $this->stores = [
                 ['name' => 'ElectroStore', 'offer' => 'Hasta 65% Off', 'badge' => 'Lo más buscado', 'imageUrl' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuCCXL9szgLh4Sf-Xl4YNw4PYGVzVd67M4HhI81aJFjISlOHCu6e2-WJbdvIHdbbnOBm-V6BUSTfnKhvh9yTXlTvRjfDiLMX0r5RpYuSctHWdVil0tipBrOAEF-E0hNGasuaFMhTlMLOYZs73i8YXAS8eCMPls60DEkBvpCecLwsE22Wsx89dVnybQk_icaSL7g6TZPd5CQ0Yq5l3B8k0p2RAMn6j1CLphA65SmU2A0iWl_IyYylGd1kGaaCOU5nLsjr5pEq57QTDRcO', 'link' => '#'],
@@ -28,43 +27,59 @@ new class extends Component
 
 <div>
     <section class="relative">
-        <div class="flex items-center justify-between mb-8">
-            <h2 class="text-2xl font-bold text-secondary">{{ $title }}</h2>
-        </div>
+        @if($title)
+            <div class="flex items-center justify-between mb-8">
+                <h2 class="text-2xl font-bold text-secondary">{{ $title }}</h2>
+            </div>
+        @endif
 
         <div class="relative group/carousel" x-data>
             {{-- Navigation Arrows --}}
             <button
                 x-on:click="$refs.showcaseGrid.scrollBy({left: -400, behavior: 'smooth'})"
-                class="absolute left-[-20px] top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-xl flex items-center justify-center z-20 text-black hover:bg-slate-50 transition-colors border border-slate-100 hidden md:flex"
+                class="absolute left-[-20px] top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-xl items-center justify-center z-20 text-black hover:bg-slate-50 transition-colors border border-slate-100 hidden md:flex"
             >
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
             </button>
             <button
                 x-on:click="$refs.showcaseGrid.scrollBy({left: 400, behavior: 'smooth'})"
-                class="absolute right-[-20px] top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-xl flex items-center justify-center z-20 text-black hover:bg-slate-50 transition-colors border border-slate-100 hidden md:flex"
+                class="absolute right-[-20px] top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-xl items-center justify-center z-20 text-black hover:bg-slate-50 transition-colors border border-slate-100 hidden md:flex"
             >
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
             </button>
 
             <div
                 x-ref="showcaseGrid"
-                @class([
-                    'grid gap-6 overflow-hidden',
-                    'grid-cols-1 md:grid-cols-2 lg:grid-cols-4' => $aspectRatio === '4/5',
-                    'grid-cols-1 md:grid-cols-3' => $aspectRatio === '16/9',
-                ])
+                class="grid gap-6 overflow-hidden {{ $aspectRatio === '16/9' ? 'grid-cols-1 md:grid-cols-3' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4' }}"
             >
                 @foreach($stores as $store)
-                    <livewire:⚡store-card
-                        :name="$store['name']"
-                        :offer="$store['offer']"
-                        :badge="$store['badge']"
-                        :image-url="$store['imageUrl']"
-                        :link="$store['link']"
-                        :aspect-ratio="$aspectRatio"
-                        :key="'store-'.$loop->index"
-                    />
+                    <a
+                        href="{{ $store['link'] }}"
+                        class="relative rounded-2xl overflow-hidden shadow-lg group block {{ $aspectRatio === '16/9' ? 'aspect-[16/9]' : 'aspect-[4/5]' }}"
+                        wire:navigate
+                        wire:key="store-{{ $loop->index }}"
+                    >
+                        <img
+                            alt="{{ $store['name'] }}"
+                            class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                            src="{{ $store['imageUrl'] }}"
+                            loading="lazy"
+                        />
+                        <div class="absolute inset-0 store-overlay-gradient"></div>
+
+                        <div class="absolute bottom-6 md:bottom-8 left-6 md:left-8 text-white pr-4">
+                            <h4 class="{{ $aspectRatio === '16/9' ? 'text-xl md:text-2xl' : 'text-2xl md:text-3xl' }} font-bold mb-1 md:mb-2 leading-tight">
+                                {{ $store['name'] }}
+                            </h4>
+                            <p class="text-sm md:text-base font-medium opacity-90">{{ $store['offer'] }}</p>
+                        </div>
+
+                        @if(!empty($store['badge']))
+                            <div class="absolute top-4 md:top-6 left-4 md:left-6 bg-white/10 backdrop-blur-md px-3 py-1 md:py-1.5 rounded-lg text-[9px] md:text-[10px] text-white font-bold tracking-wider uppercase">
+                                {{ $store['badge'] }}
+                            </div>
+                        @endif
+                    </a>
                 @endforeach
             </div>
         </div>

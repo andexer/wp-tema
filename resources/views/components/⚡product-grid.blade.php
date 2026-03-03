@@ -8,7 +8,6 @@ new class extends Component
     public string $viewAllUrl = '#';
     public array $products = [];
     public int $perPage = 10;
-    public int $page = 1;
 
     public function mount(string $title = 'Productos Recomendados', string $viewAllUrl = '#', string $source = 'featured'): void
     {
@@ -70,6 +69,14 @@ new class extends Component
             ];
         }
     }
+
+    public function addToCart(int $productId): void
+    {
+        if ($productId && function_exists('WC')) {
+            WC()->cart->add_to_cart($productId);
+            $this->dispatch('cart-updated');
+        }
+    }
 };
 ?>
 
@@ -83,17 +90,44 @@ new class extends Component
             </a>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            @foreach($products as $product)
-                <livewire:⚡product-card
-                    :name="$product['name']"
-                    :price="$product['price']"
-                    :image="$product['image']"
-                    :url="$product['url']"
-                    :badge="$product['badge']"
-                    :badge-color="$product['badgeColor']"
-                    :product-id="$product['id']"
-                    :key="'product-'.$loop->index"
-                />
+            @foreach($products as $item)
+                <div class="bg-white rounded-[1.25rem] flex flex-col subtle-shadow overflow-hidden group hover:shadow-xl transition-all border border-transparent hover:border-slate-100" wire:key="product-{{ $loop->index }}">
+                    {{-- Imagen --}}
+                    <a href="{{ $item['url'] }}" class="relative aspect-square bg-white overflow-hidden block" wire:navigate>
+                        <img
+                            alt="{{ $item['name'] }}"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            src="{{ $item['image'] }}"
+                            loading="lazy"
+                        />
+                        @if($item['badge'])
+                            <span class="absolute top-4 left-4 text-white text-[10px] font-black px-2.5 py-1 rounded-md uppercase tracking-wider {{ $item['badgeColor'] === 'orange' ? 'bg-primary' : ($item['badgeColor'] === 'green' ? 'bg-green-500' : 'bg-[#e43f3f]') }}">
+                                {{ $item['badge'] }}
+                            </span>
+                        @endif
+                    </a>
+
+                    {{-- Info --}}
+                    <div class="p-5 flex-1 flex flex-col">
+                        <a href="{{ $item['url'] }}" wire:navigate>
+                            <h3 class="text-secondary font-semibold text-sm line-clamp-2 mb-2 min-h-[40px] hover:text-primary transition-colors">
+                                {{ $item['name'] }}
+                            </h3>
+                        </a>
+                        <p class="text-primary font-bold text-xl mb-5">{!! $item['price'] !!}</p>
+
+                        <flux:button
+                            wire:click="addToCart({{ $item['id'] }})"
+                            wire:loading.attr="disabled"
+                            wire:target="addToCart({{ $item['id'] }})"
+                            variant="primary"
+                            class="!w-full !bg-primary !py-3 !rounded-xl !font-bold !text-sm hover:!bg-[#085a9c] active:!scale-95 mt-auto"
+                        >
+                            <span wire:loading.remove wire:target="addToCart({{ $item['id'] }})">Agregar al Carrito</span>
+                            <span wire:loading wire:target="addToCart({{ $item['id'] }})">Agregando...</span>
+                        </flux:button>
+                    </div>
+                </div>
             @endforeach
         </div>
     </section>

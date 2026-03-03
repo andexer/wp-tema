@@ -1,5 +1,5 @@
 <!doctype html>
-<html @php(language_attributes()) class='dark'>
+<html @php(language_attributes()) class="light">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,8 +21,8 @@
       @include('sections.header')
 
       <main id="main" class="main">
-        @yield('content')
         <livewire:counter />
+        @yield('content')
       </main>
 
       @hasSection('sidebar')

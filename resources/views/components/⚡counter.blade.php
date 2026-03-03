@@ -23,11 +23,25 @@ new class extends Component
 };
 ?>
 
-<div>
-    <flux:card class="flex flex-col items-center justify-center">
-        <h1 class="text-2xl font-bold">{{ $count }}</h1>
-        <flux:button wire:click="increment" color="primary">Increment +1</flux:button>
-        <flux:button wire:click="decrement" color="secondary">Decrement -1</flux:button>
-        <flux:button wire:click="reset" color="danger">Reset 0</flux:button>
+<div class="max-w-sm mx-auto my-12">
+    <flux:card class="space-y-8 p-10 bg-white/50 backdrop-blur-sm border-zinc-200/50 shadow-xl rounded-2xl">
+        <div class="text-center space-y-2">
+            <div class="text-6xl font-black text-zinc-900 tracking-tighter">{{ $count }}</div>
+            <flux:subheading class="uppercase tracking-widest text-xs font-bold text-zinc-500">Global Counter</flux:subheading>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+            <flux:button wire:click="decrement" icon="minus" variant="primary" color="rose" class="py-4">
+                Decrement
+            </flux:button>
+
+            <flux:button wire:click="increment" icon="plus" variant="primary" class="py-4">
+                Increment
+            </flux:button>
+
+            <flux:button wire:click="reset" icon="arrow-path" variant="danger" class="col-span-2 py-3 mt-2">
+                Reset to Zero
+            </flux:button>
+        </div>
     </flux:card>
 </div>

@@ -33,10 +33,10 @@ new class extends Component
             </div>
         </div>
 
-        <div x-ref="storeScroller" class="flex gap-6 overflow-x-auto no-scrollbar pb-4 px-2">
+        <div x-ref="storeScroller" class="flex gap-4 sm:gap-6 overflow-x-auto no-scrollbar pb-4 px-4 sm:px-0 scroll-smooth snap-x snap-mandatory">
             @foreach($stores as $store)
-                <a href="{{ $store['url'] }}" class="flex-shrink-0 w-[140px] group cursor-pointer text-center" wire:navigate>
-                    <div class="w-full aspect-square bg-white rounded-2xl flex items-center justify-center p-8 mb-4 product-card-shadow transition-all group-hover:shadow-md">
+                <a href="{{ $store['url'] }}" class="flex-shrink-0 w-[100px] sm:w-[140px] group cursor-pointer text-center snap-start" wire:navigate>
+                    <div class="w-full aspect-square bg-white rounded-xl sm:rounded-2xl flex items-center justify-center p-4 sm:p-8 mb-3 sm:mb-4 product-card-shadow transition-all group-hover:shadow-md">
                         <img
                             alt="{{ $store['name'] }}"
                             class="max-w-full max-h-full object-contain"
@@ -44,7 +44,7 @@ new class extends Component
                             loading="lazy"
                         />
                     </div>
-                    <span class="text-sm font-medium text-slate-800 transition-colors group-hover:text-primary">{{ $store['name'] }}</span>
+                    <span class="text-xs sm:text-sm font-medium text-slate-800 transition-colors group-hover:text-primary truncate block px-1">{{ $store['name'] }}</span>
                 </a>
             @endforeach
         </div>

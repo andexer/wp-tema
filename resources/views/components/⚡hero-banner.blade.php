@@ -44,7 +44,7 @@ new class extends Component
                     this.autoplay = setInterval(() => this.next(), 6000);
                 }
             }"
-            class="relative rounded-[2rem] overflow-hidden bg-secondary min-h-[400px] md:min-h-[520px] lg:min-h-[580px] shadow-2xl flex items-center"
+            class="relative rounded-[2rem] sm:rounded-[2rem] rounded-3xl overflow-hidden bg-secondary min-h-[300px] sm:min-h-[400px] md:min-h-[520px] lg:min-h-[580px] shadow-2xl flex items-center"
         >
             @foreach($slides as $index => $slide)
                 <div
@@ -74,23 +74,23 @@ new class extends Component
                     x-transition:enter="transition ease-out duration-700 delay-200"
                     x-transition:enter-start="opacity-0 translate-y-4"
                     x-transition:enter-end="opacity-100 translate-y-0"
-                    class="relative h-full flex flex-col justify-center px-8 md:px-20 lg:px-32 max-w-5xl text-white py-16"
+                    class="relative h-full flex flex-col justify-center px-6 sm:px-8 md:px-20 lg:px-32 max-w-5xl text-white py-10 md:py-16"
                 >
-                    <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-6 tracking-tight">
+                    <flux:heading level="1" class="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-4 md:mb-6 tracking-tight text-white">
                         {!! $slide['title'] !!}
-                    </h1>
-                    <p class="text-lg md:text-xl text-white/90 mb-12 max-w-xl leading-relaxed">
+                    </flux:heading>
+                    <p class="text-sm sm:text-lg md:text-xl text-white/90 mb-6 sm:mb-12 max-w-xl leading-relaxed">
                         {{ $slide['description'] }}
                     </p>
-                    <div class="flex flex-wrap gap-4">
+                    <div class="flex flex-wrap gap-2 sm:gap-4">
                         <flux:button
                             as="a"
                             href="{{ $slide['cta_primary']['url'] }}"
-                            class="!bg-white !text-secondary !px-10 !py-4 !rounded-xl !font-bold !text-base !shadow-lg hover:!bg-slate-100"
+                            class="!bg-white !text-secondary !px-6 sm:!px-10 !py-3 sm:!py-4 !rounded-xl !font-bold !text-sm sm:!text-base !shadow-lg hover:!bg-slate-100"
                         >
                             {{ $slide['cta_primary']['label'] }}
                         </flux:button>
-                        <a href="{{ $slide['cta_secondary']['url'] }}" class="border-2 border-white text-white px-10 py-4 rounded-xl font-bold hover:bg-white/10 transition-all text-base">
+                        <a href="{{ $slide['cta_secondary']['url'] }}" class="border-2 border-white text-white px-5 sm:px-10 py-2.5 sm:py-4 rounded-xl font-bold hover:bg-white/10 transition-all text-xs sm:text-base">
                             {{ $slide['cta_secondary']['label'] }}
                         </a>
                     </div>
@@ -103,13 +103,13 @@ new class extends Component
                     x-on:click="prev()"
                     class="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/40 hover:bg-black/60 rounded-full text-white flex items-center justify-center transition-all"
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+                    <flux:icon name="chevron-left" class="w-6 h-6" />
                 </button>
                 <button
                     x-on:click="next()"
                     class="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/40 hover:bg-black/60 rounded-full text-white flex items-center justify-center transition-all"
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                    <flux:icon name="chevron-right" class="w-6 h-6" />
                 </button>
 
                 {{-- Dots --}}

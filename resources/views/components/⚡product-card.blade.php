@@ -57,7 +57,7 @@ new class extends Component
             wire:click="addToCart"
             wire:loading.attr="disabled"
             variant="primary"
-            class="!w-full !bg-primary !py-3 !rounded-xl !font-bold !text-sm hover:!bg-[#085a9c] active:!scale-95 mt-auto"
+            class="!w-full !bg-primary !py-3 !rounded-xl !font-bold !text-sm hover:!bg-[#d14d15] active:!scale-95 mt-auto"
         >
             <span wire:loading.remove wire:target="addToCart">Agregar al Carrito</span>
             <span wire:loading wire:target="addToCart">Agregando...</span>

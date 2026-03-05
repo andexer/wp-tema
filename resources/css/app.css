@@ -1,7 +1,11 @@
 @import 'tailwindcss';
-@import '../../vendor/livewire/flux/dist/flux.css';
+@plugin "@tailwindcss/typography";
 
+@import '../../vendor/livewire/flux/dist/flux.css';
 @source '../views';
+@source '../../*.php';
+@source '../../app/**/*.php';
+@source '../../woocommerce/**/*.php';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
 @source '../../vendor/livewire/flux/stubs/**/*.blade.php';
@@ -10,72 +14,670 @@
 
 /* ── Flux gray reassignment ── */
 @theme {
-    --color-zinc-50: var(--color-neutral-50);
-    --color-zinc-100: var(--color-neutral-100);
-    --color-zinc-200: var(--color-neutral-200);
-    --color-zinc-300: var(--color-neutral-300);
-    --color-zinc-400: var(--color-neutral-400);
-    --color-zinc-500: var(--color-neutral-500);
-    --color-zinc-600: var(--color-neutral-600);
-    --color-zinc-700: var(--color-neutral-700);
-    --color-zinc-800: var(--color-neutral-800);
-    --color-zinc-900: var(--color-neutral-900);
-    --color-zinc-950: var(--color-neutral-950);
+  --color-zinc-50: var(--color-neutral-50);
+  --color-zinc-100: var(--color-neutral-100);
+  --color-zinc-200: var(--color-neutral-200);
+  --color-zinc-300: var(--color-neutral-300);
+  --color-zinc-400: var(--color-neutral-400);
+  --color-zinc-500: var(--color-neutral-500);
+  --color-zinc-600: var(--color-neutral-600);
+  --color-zinc-700: var(--color-neutral-700);
+  --color-zinc-800: var(--color-neutral-800);
+  --color-zinc-900: var(--color-neutral-900);
+  --color-zinc-950: var(--color-neutral-950);
 }
 
 /* ── DeTodo24 Brand Colors ── */
 @theme {
-    --color-accent: #F26522;
-    --color-accent-content: #D14D15;
-    --color-accent-foreground: var(--color-white);
-    --color-primary: #F26522;
-    --color-secondary: #00063d;
-    --color-brand-orange: #f26419;
-    --color-background-light: #ebebeb;
+  --color-accent: #f26522;
+  --color-accent-content: #d14d15;
+  --color-accent-foreground: var(--color-white);
+  --color-primary: #f26522;
+  --color-secondary: #00063d;
+  --color-brand-orange: #f26419;
+  --color-background-light: #ebebeb;
 }
 
 @layer theme {
-    .dark {
-        --color-accent: var(--color-orange-400);
-        --color-accent-content: var(--color-orange-400);
-        --color-accent-foreground: var(--color-orange-950);
-    }
+  .dark {
+    --color-accent: var(--color-orange-400);
+    --color-accent-content: var(--color-orange-400);
+    --color-accent-foreground: var(--color-orange-950);
+  }
 }
 
 /* ── DeTodo24 Custom Utilities ── */
 @layer base {
-    body {
-        @apply bg-background-light text-slate-900 antialiased;
-    }
+  html, body {
+    @apply antialiased overflow-x-hidden;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply bg-background-light text-slate-900;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
 }
 
 @layer utilities {
-    .hero-gradient {
-        background: linear-gradient(90deg, #00063d 0%, rgba(0, 6, 61, 0.95) 40%, rgba(242, 101, 34, 0.4) 100%);
-    }
+  .hero-gradient {
+    background: linear-gradient(
+      90deg,
+      #00063d 0%,
+      rgba(0, 6, 61, 0.95) 40%,
+      rgba(242, 101, 34, 0.4) 100%
+    );
+  }
 
-    .promo-gradient {
-        background: linear-gradient(135deg, #F26522 0%, #D14D15 100%);
-    }
+  .promo-gradient {
+    background: linear-gradient(135deg, #f26522 0%, #d14d15 100%);
+  }
 
-    .no-scrollbar::-webkit-scrollbar {
-        display: none;
-    }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 
-    .no-scrollbar {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-    }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 
-    .product-card-shadow {
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    }
+  .product-card-shadow {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  }
 
-    .subtle-shadow {
-        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-    }
+  .subtle-shadow {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  }
 
-    .store-overlay-gradient {
-        background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+  .store-overlay-gradient {
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.8) 0%,
+      rgba(0, 0, 0, 0.2) 60%,
+      transparent 100%
+    );
+  }
+
+  /* ── Fix hover NARANJA OSCURO en TODOS los botones primarios de Flux ── */
+  .btn-primary:hover,
+  [data-flux-button][data-variant='primary']:hover,
+  [data-flux-button].bg-primary:hover {
+    background-color: var(--color-accent-content) !important;
+  }
+
+  /* ── Glass card (mobile) ── */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+  }
+
+  /* ── Mobile Bottom Nav ── */
+  .mobile-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid rgb(241 245 249);
+    padding: 0.5rem 1rem env(safe-area-inset-bottom, 0.5rem);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 60;
+  }
+
+  .mobile-bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    color: rgb(148 163 184);
+    transition: color 0.2s;
+    text-decoration: none;
+    min-width: 3rem;
+  }
+
+  .mobile-bottom-nav-item.active {
+    color: var(--color-primary);
+  }
+
+  .mobile-bottom-nav-item svg,
+  .mobile-bottom-nav-item .nav-icon {
+    width: 1.375rem;
+    height: 1.375rem;
+  }
+
+  .mobile-bottom-nav-label {
+    font-size: 0.5625rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+}
+
+
+/* ── DeTodo24 WooCommerce Tailwind Overrides ── */
+/* NOTE: These are OUTSIDE @layer so they override WooCommerce's unlayered default CSS */
+
+  /* 1. Global & Typography */
+  .woocommerce,
+  .woocommerce-page {
+    @apply text-slate-700 font-sans;
+  }
+
+  .woocommerce h1.page-title,
+  .woocommerce-products-header__title {
+    @apply text-3xl md:text-5xl font-extrabold text-secondary mb-8 tracking-tight;
+  }
+
+  .woocommerce h2,
+  .woocommerce h3 {
+    @apply font-bold text-secondary tracking-tight;
+  }
+
+  /* 2. Primary Action Buttons */
+  .woocommerce button.button.alt,
+  .woocommerce-page button.button.alt,
+  .woocommerce input.button.alt,
+  .woocommerce-page input.button.alt,
+  .woocommerce #respond input#submit.alt,
+  .woocommerce a.button.alt,
+  .woocommerce a.button.checkout {
+    @apply inline-flex items-center justify-center font-bold px-6 py-3 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5;
+    @apply bg-primary text-white hover:bg-accent-content border border-transparent;
+  }
+
+  /* Disable opacity on disabled buttons */
+  .woocommerce button.button.alt:disabled,
+  .woocommerce button.button.alt.disabled {
+    @apply opacity-50 cursor-not-allowed hover:bg-primary shadow-none hover:translate-y-0 hover:shadow-none;
+  }
+
+  /* 3. Secondary Action Buttons */
+  .woocommerce button.button,
+  .woocommerce-page button.button,
+  .woocommerce input.button,
+  .woocommerce-page input.button,
+  .woocommerce #respond input#submit,
+  .woocommerce a.button {
+    @apply inline-flex items-center justify-center font-semibold px-5 py-2.5 rounded-xl transition-all duration-300 shadow-sm hover:shadow-md;
+    @apply bg-white text-slate-800 border border-slate-200 hover:border-slate-300 hover:bg-slate-50;
+  }
+
+  /* 4. Text Inputs, Textareas & Selects */
+  .woocommerce form .form-row input.input-text,
+  .woocommerce form .form-row textarea,
+  .woocommerce select {
+    @apply w-full rounded-xl border-slate-200 bg-slate-50 shadow-sm focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300 py-3 px-4 text-slate-800 disabled:bg-slate-100 disabled:opacity-75;
+  }
+  .woocommerce form .form-row label {
+    @apply block text-sm font-semibold text-slate-700 mb-2;
+  }
+
+  /* 5. Product Grid (Shop Page) */
+  .woocommerce ul.products,
+  .woocommerce-page ul.products {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 list-none p-0;
+  }
+  .woocommerce ul.products::before,
+  .woocommerce ul.products::after {
+    @apply hidden;
+  } /* Remove clearfix */
+
+  .woocommerce ul.products li.product {
+    @apply flex flex-col bg-white p-5 rounded-2xl shadow-sm border border-slate-100 transition-all duration-500 hover:shadow-xl hover:-translate-y-1 relative w-full mb-0 overflow-hidden;
+    
+    &:hover a img {
+      @apply scale-105;
     }
+    
+    &:hover h2.woocommerce-loop-product__title {
+      @apply text-primary;
+    }
+  }
+
+  .woocommerce ul.products li.product a img {
+    @apply rounded-xl mb-5 w-full aspect-square object-cover transition-transform duration-700;
+  }
+
+  .woocommerce ul.products li.product h2.woocommerce-loop-product__title {
+    @apply text-lg font-bold text-secondary mb-2 line-clamp-2 leading-snug transition-colors mt-0 py-0 text-left;
+  }
+
+  .woocommerce ul.products li.product .price {
+    @apply flex items-center gap-2 text-primary font-bold text-xl mb-5 mt-auto text-left justify-start;
+  }
+  .woocommerce ul.products li.product .price del {
+    @apply text-sm text-slate-400 font-medium line-through;
+  }
+  .woocommerce ul.products li.product .price ins {
+    @apply no-underline bg-transparent;
+  }
+
+  .woocommerce ul.products li.product .button {
+    @apply w-full mt-auto mb-0 bg-primary/10 text-primary border-transparent shadow-none hover:bg-primary hover:text-white font-bold;
+  }
+
+  /* Badges */
+  .woocommerce span.onsale {
+    @apply absolute top-5 left-5 right-auto bg-red-500 text-white text-xs font-black uppercase tracking-wider px-3 py-1.5 rounded-full z-10 shadow-md min-h-0 min-w-0 leading-none;
+  }
+
+  /* 6. Single Product Page */
+  .woocommerce div.product {
+    @apply max-w-7xl mx-auto flex flex-col md:flex-row gap-12 lg:gap-16 mt-8;
+  }
+  .woocommerce div.product div.images {
+    @apply md:w-1/2 mb-8 md:mb-0;
+  }
+  .woocommerce div.product div.images img {
+    @apply rounded-3xl shadow-lg border border-slate-100 w-full object-cover;
+  }
+  .woocommerce div.product div.summary {
+    @apply md:w-1/2 flex flex-col;
+  }
+
+  .woocommerce div.product .product_title {
+    @apply text-3xl lg:text-4xl font-extrabold text-secondary mb-4 leading-tight;
+  }
+
+  .woocommerce div.product p.price {
+    @apply text-3xl font-black text-primary mb-6 flex items-center gap-4;
+  }
+  .woocommerce div.product p.price del {
+    @apply text-xl text-slate-400 font-semibold;
+  }
+
+  .woocommerce div.product .woocommerce-product-details__short-description {
+    @apply text-slate-600 text-lg mb-8 leading-relaxed;
+  }
+
+  /* Quantity & Add to Cart Container */
+  .woocommerce div.product form.cart {
+    @apply flex flex-wrap items-center gap-4 mb-8 pt-6 border-t border-slate-100;
+  }
+
+  .woocommerce div.product form.cart .quantity {
+    @apply flex;
+  }
+
+  .woocommerce .quantity .qty {
+    @apply w-20 text-center font-bold text-lg rounded-xl border-slate-200 bg-slate-50 py-3 shadow-sm focus:border-primary focus:ring-4 focus:ring-primary/10;
+  }
+
+  .woocommerce div.product form.cart .button {
+    @apply flex-1 py-4 text-lg rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1;
+  }
+
+  /* Product Meta */
+  .woocommerce div.product .product_meta {
+    @apply flex flex-col gap-2 py-6 border-t border-slate-100 text-sm text-slate-500;
+  }
+  .woocommerce div.product .product_meta span {
+    @apply font-semibold text-slate-700;
+  }
+  .woocommerce div.product .product_meta a {
+    @apply text-primary hover:underline font-medium;
+  }
+
+  /* Product Tabs */
+  .woocommerce div.product .woocommerce-tabs {
+    @apply w-full mt-16 pt-8 border-t border-slate-200;
+  }
+  .woocommerce div.product .woocommerce-tabs ul.tabs {
+    @apply flex flex-wrap gap-2 md:gap-4 mb-8 p-0 list-none m-0 border-none before:hidden;
+  }
+  .woocommerce div.product .woocommerce-tabs ul.tabs li {
+    @apply m-0 p-0 border-none bg-transparent rounded-none;
+  }
+  .woocommerce div.product .woocommerce-tabs ul.tabs li::before,
+  .woocommerce div.product .woocommerce-tabs ul.tabs li::after {
+    @apply hidden;
+  }
+  .woocommerce div.product .woocommerce-tabs ul.tabs li a {
+    @apply font-bold text-lg text-slate-500 hover:text-primary transition-colors pb-3 px-2 border-b-2 border-transparent;
+  }
+  .woocommerce div.product .woocommerce-tabs ul.tabs li.active a {
+    @apply text-secondary border-primary;
+  }
+  .woocommerce div.product .woocommerce-tabs .panel {
+    @apply text-slate-600 leading-relaxed text-lg prose prose-slate max-w-none;
+  }
+  .woocommerce div.product .woocommerce-tabs .panel h2 {
+    @apply hidden;
+  }
+
+  /* 7. Cart Page */
+  .woocommerce-cart .woocommerce {
+    @apply flex flex-col lg:flex-row gap-12 mt-8;
+  }
+
+  .woocommerce-cart form.woocommerce-cart-form {
+    @apply w-full lg:w-2/3;
+  }
+
+  .woocommerce table.shop_table {
+    @apply w-full border-collapse rounded-2xl overflow-hidden shadow-sm border border-slate-200 mb-8 bg-white m-0;
+  }
+  .woocommerce table.shop_table th {
+    @apply bg-slate-50 text-slate-700 font-bold uppercase tracking-wider text-sm py-4 px-6 border-b border-slate-200 text-left;
+  }
+  .woocommerce table.shop_table td {
+    @apply py-6 px-6 border-t border-slate-100 align-middle;
+  }
+
+  /* Cart Items */
+  .woocommerce table.cart .product-remove a.remove {
+    @apply !text-red-500 hover:!text-white hover:bg-red-500 !font-bold text-xl rounded-full w-8 h-8 flex items-center justify-center transition-all;
+  }
+  .woocommerce table.cart .product-thumbnail img {
+    @apply w-20 h-20 object-cover rounded-xl shadow-sm;
+  }
+  .woocommerce table.cart .product-name a {
+    @apply font-bold text-secondary text-lg hover:text-primary transition-colors;
+  }
+  .woocommerce table.cart .product-subtotal .amount {
+    @apply font-bold text-primary text-lg;
+  }
+
+  /* Cart Actions / Coupon */
+  .woocommerce table.cart td.actions {
+    @apply pt-6 pb-6 bg-slate-50/50 border-t border-slate-100 text-right;
+  }
+  .woocommerce table.cart td.actions .coupon {
+    @apply flex flex-col sm:flex-row gap-3 float-left w-full max-w-sm;
+  }
+  .woocommerce table.cart td.actions .coupon input.input-text {
+    @apply w-full m-0 shadow-sm border-slate-300;
+  }
+  .woocommerce table.cart td.actions > .button {
+    @apply mt-4 sm:mt-0 max-sm:w-full;
+  }
+
+  /* Cart Totals Sidebar */
+  .woocommerce .cart-collaterals {
+    @apply w-full lg:w-1/3 flex flex-col;
+  }
+  .woocommerce .cart-collaterals .cart_totals {
+    @apply w-full bg-white rounded-2xl shadow-xl border border-slate-100 p-8 sticky top-24 float-none;
+  }
+  .woocommerce .cart-collaterals .cart_totals h2 {
+    @apply text-2xl font-extrabold text-secondary mb-6 pb-4 border-b border-slate-100;
+  }
+  .woocommerce .cart-collaterals .cart_totals table {
+    @apply w-full mb-8 m-0 border-none;
+  }
+  .woocommerce .cart-collaterals .cart_totals table th {
+    @apply w-1/3 py-4 text-left font-semibold text-slate-600 border-b border-slate-100;
+  }
+  .woocommerce .cart-collaterals .cart_totals table td {
+    @apply py-4 text-right border-b border-slate-100 font-bold text-slate-800;
+  }
+  .woocommerce .cart-collaterals .cart_totals table tr.order-total th,
+  .woocommerce .cart-collaterals .cart_totals table tr.order-total td {
+    @apply pt-6 border-none text-2xl;
+  }
+  .woocommerce .cart-collaterals .cart_totals table tr.order-total td strong .amount {
+    @apply text-primary font-black;
+  }
+
+  .woocommerce .cart-collaterals .checkout-button {
+    @apply w-full py-4 text-lg rounded-xl shadow-lg mt-4;
+  }
+
+  /* 8. Checkout Page */
+  .woocommerce-checkout .woocommerce {
+    @apply mt-8;
+  }
+
+  .woocommerce-checkout form.checkout_coupon {
+    @apply p-6 mb-8 bg-slate-50 rounded-2xl border border-slate-200 flex flex-col sm:flex-row gap-4 items-center;
+  }
+
+  .woocommerce-checkout form.checkout.woocommerce-checkout {
+    @apply flex flex-col lg:flex-row gap-12;
+  }
+
+  .woocommerce-checkout #customer_details {
+    @apply w-full lg:w-3/5;
+  }
+
+  .woocommerce-checkout #order_review_heading {
+    @apply text-2xl font-extrabold text-secondary mb-6;
+  }
+
+  .woocommerce-checkout #order_review {
+    @apply w-full lg:w-2/5 md:bg-white md:rounded-2xl md:shadow-xl md:border md:border-slate-100 md:p-8;
+  }
+
+  /* Checkout Totals Table */
+  .woocommerce-checkout table.shop_table {
+    @apply border-none shadow-none bg-transparent mb-8;
+  }
+  .woocommerce-checkout table.shop_table th,
+  .woocommerce-checkout table.shop_table td {
+    @apply border-b border-slate-100 py-4 px-0;
+  }
+  .woocommerce-checkout table.shop_table tfoot tr:last-child th,
+  .woocommerce-checkout table.shop_table tfoot tr:last-child td {
+    @apply border-none py-6 text-2xl;
+  }
+  .woocommerce-checkout table.shop_table tfoot .order-total .amount {
+    @apply text-primary font-black;
+  }
+
+  /* Checkout Payment Box */
+  .woocommerce-checkout #payment {
+    @apply bg-slate-50 rounded-2xl border border-slate-200 p-0 overflow-hidden;
+  }
+  .woocommerce-checkout #payment ul.payment_methods {
+    @apply p-6 border-b border-slate-200 m-0 list-none;
+  }
+  .woocommerce-checkout #payment ul.payment_methods li {
+    @apply mb-4 last:mb-0;
+  }
+  .woocommerce-checkout #payment ul.payment_methods label {
+    @apply font-bold text-secondary inline-flex items-center gap-2 cursor-pointer;
+  }
+  .woocommerce-checkout #payment div.payment_box {
+    @apply bg-white p-4 rounded-xl shadow-sm text-sm text-slate-600 mt-2 relative border border-slate-100;
+  }
+  .woocommerce-checkout #payment div.payment_box::before {
+    @apply hidden; /* remove default woo arrow */
+  }
+  .woocommerce-checkout #payment .place-order {
+    @apply p-6 bg-slate-100/50 m-0;
+  }
+  .woocommerce-checkout #payment button#place_order {
+    @apply w-full py-4 text-lg shadow-lg;
+  }
+
+  /* 9. Notices and Alerts */
+  .woocommerce-message,
+  .woocommerce-info,
+  .woocommerce-error {
+    @apply p-5 mb-8 rounded-2xl flex items-center justify-between font-semibold border-l-[6px] shadow-sm;
+  }
+  .woocommerce-message {
+    @apply bg-green-50 text-green-900 border-green-500 shadow-green-900/5;
+  }
+  .woocommerce-info {
+    @apply bg-blue-50 text-blue-900 border-blue-500 shadow-blue-900/5;
+  }
+  .woocommerce-error {
+    @apply bg-red-50 text-red-900 border-red-500 list-none shadow-red-900/5;
+  }
+  .woocommerce-message::before,
+  .woocommerce-info::before,
+  .woocommerce-error::before {
+    @apply hidden; /* Hide default icon */
+  }
+  .woocommerce-message .button,
+  .woocommerce-info .button,
+  .woocommerce-error .button {
+    @apply ml-4 bg-white hover:bg-white text-current px-5 py-2.5 rounded-xl text-sm border-none shadow-sm hover:shadow-md transition-all font-bold whitespace-nowrap;
+  }
+
+a {
+  text-decoration: none;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   MOBILE RESPONSIVE OVERRIDES — DeTodo24
+   Mejoras para pantallas < 768px (móviles)
+   ══════════════════════════════════════════════════════════ */
+
+/* Padding inferior del body para que el content no quede
+   oculto bajo la barra de navegación inferior en móvil */
+/* Eliminado el padding-bottom para evitar espacio en blanco */
+@media (max-width: 1023px) {
+  body {
+    padding-bottom: 0;
+  }
+}
+
+/* ── Hero Banner móvil ── */
+@media (max-width: 767px) {
+  /* Reducir altura mínima del hero en móvil */
+  .hero-section-wrapper .relative.rounded-\[2rem\] {
+    min-height: 320px !important;
+    border-radius: 1.5rem !important;
+  }
+
+  /* Texto del hero más compacto en móvil */
+  .hero-section-wrapper h1 {
+    font-size: 1.75rem !important;
+    line-height: 1.15 !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  .hero-section-wrapper p {
+    font-size: 0.875rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .hero-section-wrapper .flex.flex-wrap.gap-4 {
+    gap: 0.5rem !important;
+  }
+}
+
+/* ── Product Grid — 2 columnas en móvil con gap reducido ── */
+@media (max-width: 639px) {
+  .woocommerce ul.products,
+  .woocommerce-page ul.products {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  /* Card de producto más compacta en xs */
+  .woocommerce ul.products li.product {
+    padding: 0.75rem;
+  }
+
+  .woocommerce ul.products li.product h2.woocommerce-loop-product__title {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  .woocommerce ul.products li.product .price {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+}
+
+/* ── Category Bar — mejor tap target en móvil ── */
+@media (max-width: 767px) {
+  .no-scrollbar {
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+  }
+
+  .no-scrollbar a,
+  .no-scrollbar span {
+    scroll-snap-align: start;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* ── Section Headings — ajuste en móvil ── */
+@media (max-width: 767px) {
+  .woocommerce h1.page-title,
+  .woocommerce-products-header__title {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    margin-bottom: 1.25rem;
+  }
+}
+
+/* ── Cart / Checkout — más compacto en móvil ── */
+@media (max-width: 767px) {
+  .woocommerce table.shop_table th,
+  .woocommerce table.shop_table td {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  .woocommerce table.cart .product-thumbnail img {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .woocommerce table.cart .product-name a {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+}
+
+/* ── Single Product — stacks en móvil ── */
+@media (max-width: 767px) {
+  .woocommerce div.product {
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .woocommerce div.product .product_title {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .woocommerce div.product p.price {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .woocommerce div.product form.cart .button {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+}
+
+/* ── Promo Banner — compacto en móvil ── */
+@media (max-width: 767px) {
+  .promo-banner-wrapper {
+    border-radius: 1rem;
+    padding: 1rem;
+  }
+}
+
+/* ── Footer — reducir padding en móvil ── */
+/* Eliminado el padding extra del footer */
+@media (max-width: 767px) {
+  footer.bg-secondary {
+    padding-bottom: 0;
+  }
 }

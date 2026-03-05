@@ -160,7 +160,7 @@ class LivewireServiceProvider extends ServiceProvider
                         : 'flux-lite.min.js';
                 }
 
-                echo '<script src="' . \$__fluxBaseUrl . '/' . \$__fluxFile . '?id=' . \$__fluxVersionHash . '" data-navigate-once></script>';
+                echo '<script src="' . \$__fluxBaseUrl . '/' . \$__fluxFile . '?id=' . \$__fluxVersionHash . '" defer data-navigate-once></script>';
             ?>
             PHP;
 		});

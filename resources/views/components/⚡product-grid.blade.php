@@ -82,14 +82,14 @@ new class extends Component
 
 <div>
     <section>
-        <div class="flex items-center justify-between mb-8 px-2">
-            <h2 class="text-2xl font-bold text-secondary">{{ $title }}</h2>
+        <div class="flex items-center justify-between mb-5 sm:mb-8 px-2">
+            <h2 class="text-lg sm:text-2xl font-bold text-secondary tracking-tight">{{ $title }}</h2>
             <a class="text-primary font-bold hover:text-secondary transition-colors flex items-center gap-1 text-sm group" href="{{ $viewAllUrl }}" wire:navigate>
                 Ver todos
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
             </a>
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-6">
             @foreach($products as $item)
                 <div class="bg-white rounded-[1.25rem] flex flex-col subtle-shadow overflow-hidden group hover:shadow-xl transition-all border border-transparent hover:border-slate-100" wire:key="product-{{ $loop->index }}">
                     {{-- Imagen --}}
@@ -108,20 +108,20 @@ new class extends Component
                     </a>
 
                     {{-- Info --}}
-                    <div class="p-5 flex-1 flex flex-col">
+                    <div class="p-3 sm:p-5 flex-1 flex flex-col">
                         <a href="{{ $item['url'] }}" wire:navigate>
                             <h3 class="text-secondary font-semibold text-sm line-clamp-2 mb-2 min-h-[40px] hover:text-primary transition-colors">
                                 {{ $item['name'] }}
                             </h3>
                         </a>
-                        <p class="text-primary font-bold text-xl mb-5">{!! $item['price'] !!}</p>
+                        <p class="text-primary font-bold text-lg sm:text-xl mb-4 sm:mb-5">{!! $item['price'] !!}</p>
 
                         <flux:button
                             wire:click="addToCart({{ $item['id'] }})"
                             wire:loading.attr="disabled"
                             wire:target="addToCart({{ $item['id'] }})"
                             variant="primary"
-                            class="!w-full !bg-primary !py-3 !rounded-xl !font-bold !text-sm hover:!bg-[#085a9c] active:!scale-95 mt-auto"
+                            class="!w-full !bg-primary !py-2.5 sm:!py-3 !rounded-xl !font-bold !text-sm hover:!bg-[#d14d15] active:!scale-95 mt-auto"
                         >
                             <span wire:loading.remove wire:target="addToCart({{ $item['id'] }})">Agregar al Carrito</span>
                             <span wire:loading wire:target="addToCart({{ $item['id'] }})">Agregando...</span>

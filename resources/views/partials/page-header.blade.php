@@ -1,3 +1,3 @@
 <div class="page-header">
-  <h1>{!! $title !!}</h1>
+  <flux:heading level="1">{!! $title !!}</flux:heading>
 </div>

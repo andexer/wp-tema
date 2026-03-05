@@ -48,14 +48,14 @@ new class extends Component
 };
 ?>
 
-<div class="bg-white shadow-sm border-b border-gray-200 overflow-x-auto no-scrollbar">
-    <div class="container mx-auto px-4 lg:px-8 py-3">
-        <div class="flex items-center gap-2 text-sm whitespace-nowrap">
+<div class="bg-white shadow-sm border-b border-gray-200">
+    <div class="overflow-x-auto no-scrollbar scroll-smooth">
+        <div class="flex items-center gap-2 text-xs sm:text-sm whitespace-nowrap py-3 px-4 sm:px-6 lg:px-8 max-w-screen-2xl mx-auto">
             @foreach($categories as $index => $category)
                 <a
                     href="{{ $category['url'] }}"
                     @class([
-                        'px-4 py-2 rounded-full font-semibold transition-colors',
+                        'px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-semibold transition-colors shrink-0',
                         'bg-primary text-white' => $index === 0,
                         'text-slate-600 hover:bg-slate-50 hover:text-primary' => $index !== 0,
                     ])

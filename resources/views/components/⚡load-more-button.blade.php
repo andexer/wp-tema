@@ -20,7 +20,7 @@ new class extends Component
         wire:click="loadMore"
         wire:loading.attr="disabled"
         variant="primary"
-        class="!bg-primary hover:!bg-secondary !text-white !font-bold !py-4 !px-14 !rounded-full !transition-all !duration-300 !shadow-lg hover:!shadow-xl active:!scale-95 !uppercase !tracking-widest !text-sm"
+        class="!bg-primary hover:!bg-[#d14d15] !text-white !font-bold !py-4 !px-14 !rounded-full !transition-all !duration-300 !shadow-lg hover:!shadow-xl active:!scale-95 !uppercase !tracking-widest !text-sm"
     >
         <span wire:loading.remove wire:target="loadMore">{{ $label }}</span>
         <span wire:loading wire:target="loadMore">

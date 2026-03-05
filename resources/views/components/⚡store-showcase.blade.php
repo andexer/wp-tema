@@ -28,34 +28,34 @@ new class extends Component
 <div>
     <section class="relative">
         @if($title)
-            <div class="flex items-center justify-between mb-8">
-                <h2 class="text-2xl font-bold text-secondary">{{ $title }}</h2>
+            <div class="flex items-center justify-between mb-5 sm:mb-8">
+                <h2 class="text-lg sm:text-2xl font-bold text-secondary tracking-tight">{{ $title }}</h2>
             </div>
         @endif
 
         <div class="relative group/carousel" x-data>
-            {{-- Navigation Arrows --}}
+            {{-- Navigation Arrows - Hidden on mobile --}}
             <button
                 x-on:click="$refs.showcaseGrid.scrollBy({left: -400, behavior: 'smooth'})"
-                class="absolute left-[-20px] top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-xl items-center justify-center z-20 text-black hover:bg-slate-50 transition-colors border border-slate-100 hidden md:flex"
+                class="absolute left-[-20px] top-1/2 -translate-y-1/2 w-10 sm:w-12 h-10 sm:h-12 rounded-full bg-white shadow-xl items-center justify-center z-20 text-black hover:bg-slate-50 transition-colors border border-slate-100 hidden md:flex"
             >
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+                <flux:icon name="chevron-left" class="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
             <button
                 x-on:click="$refs.showcaseGrid.scrollBy({left: 400, behavior: 'smooth'})"
-                class="absolute right-[-20px] top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-xl items-center justify-center z-20 text-black hover:bg-slate-50 transition-colors border border-slate-100 hidden md:flex"
+                class="absolute right-[-20px] top-1/2 -translate-y-1/2 w-10 sm:w-12 h-10 sm:h-12 rounded-full bg-white shadow-xl items-center justify-center z-20 text-black hover:bg-slate-50 transition-colors border border-slate-100 hidden md:flex"
             >
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                <flux:icon name="chevron-right" class="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
 
             <div
                 x-ref="showcaseGrid"
-                class="grid gap-6 overflow-hidden {{ $aspectRatio === '16/9' ? 'grid-cols-1 md:grid-cols-3' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4' }}"
+                class="grid gap-3 sm:gap-6 overflow-hidden {{ $aspectRatio === '16/9' ? 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3' : 'grid-cols-2 lg:grid-cols-4' }}"
             >
                 @foreach($stores as $store)
                     <a
                         href="{{ $store['link'] }}"
-                        class="relative rounded-2xl overflow-hidden shadow-lg group block {{ $aspectRatio === '16/9' ? 'aspect-[16/9]' : 'aspect-[4/5]' }}"
+                        class="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-sm hover:shadow-lg group block transition-all duration-300 {{ $aspectRatio === '16/9' ? 'aspect-[16/9]' : 'aspect-[4/5]' }}"
                         wire:navigate
                         wire:key="store-{{ $loop->index }}"
                     >
@@ -67,15 +67,15 @@ new class extends Component
                         />
                         <div class="absolute inset-0 store-overlay-gradient"></div>
 
-                        <div class="absolute bottom-6 md:bottom-8 left-6 md:left-8 text-white pr-4">
-                            <h4 class="{{ $aspectRatio === '16/9' ? 'text-xl md:text-2xl' : 'text-2xl md:text-3xl' }} font-bold mb-1 md:mb-2 leading-tight">
+                        <div class="absolute bottom-3 sm:bottom-8 left-3 sm:left-8 text-white pr-3">
+                            <h4 class="{{ $aspectRatio === '16/9' ? 'text-sm sm:text-2xl' : 'text-base sm:text-3xl' }} font-bold mb-0.5 sm:mb-2 leading-tight">
                                 {{ $store['name'] }}
                             </h4>
-                            <p class="text-sm md:text-base font-medium opacity-90">{{ $store['offer'] }}</p>
+                            <p class="text-[10px] sm:text-base font-medium opacity-90">{{ $store['offer'] }}</p>
                         </div>
 
                         @if(!empty($store['badge']))
-                            <div class="absolute top-4 md:top-6 left-4 md:left-6 bg-white/10 backdrop-blur-md px-3 py-1 md:py-1.5 rounded-lg text-[9px] md:text-[10px] text-white font-bold tracking-wider uppercase">
+                            <div class="absolute top-3 sm:top-6 left-3 sm:left-6 bg-white/10 backdrop-blur-md px-2 sm:px-3 py-0.5 sm:py-1.5 rounded-md sm:rounded-lg text-[7px] sm:text-[10px] text-white font-bold tracking-wider uppercase">
                                 {{ $store['badge'] }}
                             </div>
                         @endif

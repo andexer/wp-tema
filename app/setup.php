@@ -8,6 +8,7 @@ namespace App;
 
 use Illuminate\Support\Facades\Vite;
 
+
 /**
  * Inject styles into the block editor.
  *
@@ -135,6 +136,11 @@ add_action('after_setup_theme', function () {
 	 * @link https://developer.wordpress.org/reference/functions/add_theme_support/#customize-selective-refresh-widgets
 	 */
 	add_theme_support('customize-selective-refresh-widgets');
+
+	/**
+	 * Enable WooCommerce support.
+	 */
+	//add_theme_support('woocommerce');
 }, 20);
 
 /**

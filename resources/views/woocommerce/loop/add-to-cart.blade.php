@@ -1,57 +1,37 @@
 @php
 /**
  * WooCommerce Template Override: loop/add-to-cart.php
- * Auto-generated from WooCommerce plugin template.
- * TODO: Personalizar con tu diseño Tailwind/Flux.
- * @version     9.2.0
+ * Custom Flux UI integration for the loop add to cart button.
  */
 defined('ABSPATH') || exit;
-@endphp
-
-{{-- TODO: Personalizar este template con tu diseño --}}
-
-<?php
-/**
- * Loop Add to Cart
- *
- * This template can be overridden by copying it to yourtheme/woocommerce/loop/add-to-cart.php.
- *
- * HOWEVER, on occasion WooCommerce will need to update template files and you
- * (the theme developer) will need to copy the new files to your theme to
- * maintain compatibility. We try to do this as little as possible, but it does
- * happen. When this occurs the version of the template file will be bumped and
- * the readme will list any important changes.
- *
- * @see         https://woocommerce.com/document/template-structure/
- * @package     WooCommerce\Templates
- * @version     9.2.0
- */
-
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
 
 global $product;
 
-$aria_describedby = isset( $args['aria-describedby_text'] ) ? sprintf( 'aria-describedby="woocommerce_loop_add_to_cart_link_describedby_%s"', esc_attr( $product->get_id() ) ) : '';
+$classes = isset( $args['class'] ) ? $args['class'] : 'button';
+// We must ensure the Woocommerce AJAX classes are present for the JS to bind
+if (strpos($classes, 'add_to_cart_button') === false) {
+    $classes .= ' add_to_cart_button ajax_add_to_cart';
+}
+@endphp
 
-echo apply_filters(
-	'woocommerce_loop_add_to_cart_link', // WPCS: XSS ok.
-	sprintf(
-		'<a href="%s" %s data-quantity="%s" class="%s" %s>%s</a>',
-		esc_url( $product->add_to_cart_url() ),
-		$aria_describedby,
-		esc_attr( isset( $args['quantity'] ) ? $args['quantity'] : 1 ),
-		esc_attr( isset( $args['class'] ) ? $args['class'] : 'button' ),
-		isset( $args['attributes'] ) ? wc_implode_html_attributes( $args['attributes'] ) : '',
-		esc_html( $product->add_to_cart_text() )
-	),
-	$product,
-	$args
-);
-?>
-<?php if ( isset( $args['aria-describedby_text'] ) ) : ?>
-	<span id="woocommerce_loop_add_to_cart_link_describedby_<?php echo esc_attr( $product->get_id() ); ?>" class="screen-reader-text">
-		<?php echo esc_html( $args['aria-describedby_text'] ); ?>
+<div class="w-full flex">
+    <flux:button 
+        href="{{ esc_url( $product->add_to_cart_url() ) }}" 
+        variant="primary" 
+        class="w-full !rounded-xl !font-black !uppercase !tracking-wider !text-xs !shadow-sm hover:!shadow-md transition-all active:scale-95 flex items-center justify-center gap-2 {{ $classes }}"
+        data-quantity="{{ esc_attr( isset( $args['quantity'] ) ? $args['quantity'] : 1 ) }}"
+        data-product_id="{{ esc_attr( $product->get_id() ) }}"
+        data-product_sku="{{ esc_attr( $product->get_sku() ) }}"
+        aria-label="{{ esc_attr( $product->add_to_cart_description() ) }}"
+        aria-describedby="{{ isset($args['aria-describedby_text']) ? 'woocommerce_loop_add_to_cart_link_describedby_' . $product->get_id() : '' }}"
+    >
+        <flux:icon.shopping-bag variant="solid" class="w-4 h-4" />
+        {{ esc_html( $product->add_to_cart_text() ) }}
+    </flux:button>
+</div>
+
+@if ( isset( $args['aria-describedby_text'] ) )
+	<span id="woocommerce_loop_add_to_cart_link_describedby_{{ esc_attr( $product->get_id() ) }}" class="screen-reader-text">
+		{{ esc_html( $args['aria-describedby_text'] ) }}
 	</span>
-<?php endif; ?>
+@endif

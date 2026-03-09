@@ -1,82 +1,131 @@
 @php
 /**
- * WooCommerce Template Override: checkout/form-shipping.php
- * Auto-generated from WooCommerce plugin template.
- * TODO: Personalizar con tu diseño Tailwind/Flux.
- * @version 3.6.0
- */
-defined('ABSPATH') || exit;
-@endphp
-
-{{-- TODO: Personalizar este template con tu diseño --}}
-
-<?php
-/**
  * Checkout shipping information form
- *
- * This template can be overridden by copying it to yourtheme/woocommerce/checkout/form-shipping.php.
- *
- * HOWEVER, on occasion WooCommerce will need to update template files and you
- * (the theme developer) will need to copy the new files to your theme to
- * maintain compatibility. We try to do this as little as possible, but it does
- * happen. When this occurs the version of the template file will be bumped and
- * the readme will list any important changes.
- *
- * @see     https://woocommerce.com/document/template-structure/
- * @package WooCommerce\Templates
- * @version 3.6.0
- * @global WC_Checkout $checkout
  */
 
 defined( 'ABSPATH' ) || exit;
-?>
+@endphp
+
 <div class="woocommerce-shipping-fields">
-	<?php if ( true === WC()->cart->needs_shipping_address() ) : ?>
+	@if ( true === WC()->cart->needs_shipping_address() )
+		<div class="shipping_address space-y-5">
+			@php do_action( 'woocommerce_before_checkout_shipping_form', $checkout ); @endphp
 
-		<h3 id="ship-to-different-address">
-			<label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox">
-				<input id="ship-to-different-address-checkbox" class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox" <?php checked( apply_filters( 'woocommerce_ship_to_different_address_checked', 'shipping' === get_option( 'woocommerce_ship_to_destination' ) ? 1 : 0 ), 1 ); ?> type="checkbox" name="ship_to_different_address" value="1" /> <span><?php esc_html_e( 'Ship to a different address?', 'woocommerce' ); ?></span>
-			</label>
-		</h3>
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-5">
+				{{-- First Name --}}
+                <flux:input 
+                    :label="__('First name', 'woocommerce')" 
+                    name="shipping_first_name" 
+                    id="shipping_first_name" 
+                    :value="$checkout->get_value('shipping_first_name')" 
+                    autocomplete="given-name"
+                />
 
-		<div class="shipping_address">
+                {{-- Last Name --}}
+                <flux:input 
+                    :label="__('Last name', 'woocommerce')" 
+                    name="shipping_last_name" 
+                    id="shipping_last_name" 
+                    :value="$checkout->get_value('shipping_last_name')" 
+                    autocomplete="family-name"
+                />
 
-			<?php do_action( 'woocommerce_before_checkout_shipping_form', $checkout ); ?>
+                {{-- Company --}}
+                <div class="md:col-span-2">
+                    <flux:input 
+                        :label="__('Company name (optional)', 'woocommerce')" 
+                        name="shipping_company" 
+                        id="shipping_company" 
+                        :value="$checkout->get_value('shipping_company')" 
+                        autocomplete="organization"
+                    />
+                </div>
 
-			<div class="woocommerce-shipping-fields__field-wrapper">
-				<?php
-				$fields = $checkout->get_checkout_fields( 'shipping' );
+                {{-- Country / Region --}}
+                <div class="md:col-span-2">
+                    @php
+                        $countries = WC()->countries->get_allowed_countries();
+                        $current_country = $checkout->get_value('shipping_country');
+                    @endphp
+                    <flux:select 
+                        :label="__('Country / Region', 'woocommerce')" 
+                        name="shipping_country" 
+                        id="shipping_country"
+                    >
+                        @foreach($countries as $code => $name)
+                            <option value="{{ $code }}" {{ $current_country === $code ? 'selected' : '' }}>{{ $name }}</option>
+                        @endforeach
+                    </flux:select>
+                </div>
 
-				foreach ( $fields as $key => $field ) {
-					woocommerce_form_field( $key, $field, $checkout->get_value( $key ) );
-				}
-				?>
+                {{-- Street Address --}}
+                <div class="md:col-span-2 space-y-3">
+                    <flux:input 
+                        :label="__('Street address', 'woocommerce')" 
+                        name="shipping_address_1" 
+                        id="shipping_address_1" 
+                        :value="$checkout->get_value('shipping_address_1')" 
+                        :placeholder="esc_attr__( 'House number and street name', 'woocommerce' )"
+                        autocomplete="address-line1"
+                    />
+                    <flux:input 
+                        name="shipping_address_2" 
+                        id="shipping_address_2" 
+                        :value="$checkout->get_value('shipping_address_2')" 
+                        :placeholder="esc_attr__( 'Apartment, suite, unit, etc. (optional)', 'woocommerce' )"
+                        autocomplete="address-line2"
+                    />
+                </div>
+
+                {{-- Town / City --}}
+                <flux:input 
+                    :label="__('Town / City', 'woocommerce')" 
+                    name="shipping_city" 
+                    id="shipping_city" 
+                    :value="$checkout->get_value('shipping_city')" 
+                    autocomplete="address-level2"
+                />
+
+                {{-- State / County --}}
+                <flux:input 
+                    :label="__('State / County', 'woocommerce')" 
+                    name="shipping_state" 
+                    id="shipping_state" 
+                    :value="$checkout->get_value('shipping_state')" 
+                    autocomplete="address-level1"
+                />
+
+                {{-- Postcode / ZIP --}}
+                <flux:input 
+                    :label="__('Postcode / ZIP', 'woocommerce')" 
+                    name="shipping_postcode" 
+                    id="shipping_postcode" 
+                    :value="$checkout->get_value('shipping_postcode')" 
+                    autocomplete="postal-code"
+                />
 			</div>
 
-			<?php do_action( 'woocommerce_after_checkout_shipping_form', $checkout ); ?>
-
+			@php do_action( 'woocommerce_after_checkout_shipping_form', $checkout ); @endphp
 		</div>
-
-	<?php endif; ?>
+	@endif
 </div>
-<div class="woocommerce-additional-fields">
-	<?php do_action( 'woocommerce_before_order_notes', $checkout ); ?>
 
-	<?php if ( apply_filters( 'woocommerce_enable_order_notes_field', 'yes' === get_option( 'woocommerce_enable_order_comments', 'yes' ) ) ) : ?>
+<div class="woocommerce-additional-fields pt-10 mt-10 border-t border-slate-100">
+	@php do_action( 'woocommerce_before_order_notes', $checkout ); @endphp
 
-		<?php if ( ! WC()->cart->needs_shipping() || wc_ship_to_billing_address_only() ) : ?>
-
-			<h3><?php esc_html_e( 'Additional information', 'woocommerce' ); ?></h3>
-
-		<?php endif; ?>
-
+	@if ( apply_filters( 'woocommerce_enable_order_notes_field', 'yes' === get_option( 'woocommerce_enable_order_comments', 'yes' ) ) )
 		<div class="woocommerce-additional-fields__field-wrapper">
-			<?php foreach ( $checkout->get_checkout_fields( 'order' ) as $key => $field ) : ?>
-				<?php woocommerce_form_field( $key, $field, $checkout->get_value( $key ) ); ?>
-			<?php endforeach; ?>
+			@foreach ( $checkout->get_checkout_fields( 'order' ) as $key => $field )
+				<flux:textarea 
+                    :label="esc_html( $field['label'] )" 
+                    :name="esc_attr( $key )" 
+                    :id="esc_attr( $key )" 
+                    :placeholder="esc_attr( $field['placeholder'] ?? '' )" 
+                    rows="3"
+                >{{ $checkout->get_value( $key ) }}</flux:textarea>
+			@endforeach
 		</div>
+	@endif
 
-	<?php endif; ?>
-
-	<?php do_action( 'woocommerce_after_order_notes', $checkout ); ?>
+	@php do_action( 'woocommerce_after_order_notes', $checkout ); @endphp
 </div>

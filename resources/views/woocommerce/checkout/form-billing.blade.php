@@ -1,86 +1,186 @@
 @php
 /**
- * WooCommerce Template Override: checkout/form-billing.php
- * Auto-generated from WooCommerce plugin template.
- * TODO: Personalizar con tu diseño Tailwind/Flux.
- * @version 3.6.0
- */
-defined('ABSPATH') || exit;
-@endphp
-
-{{-- TODO: Personalizar este template con tu diseño --}}
-
-<?php
-/**
  * Checkout billing information form
- *
- * This template can be overridden by copying it to yourtheme/woocommerce/checkout/form-billing.php.
- *
- * HOWEVER, on occasion WooCommerce will need to update template files and you
- * (the theme developer) will need to copy the new files to your theme to
- * maintain compatibility. We try to do this as little as possible, but it does
- * happen. When this occurs the version of the template file will be bumped and
- * the readme will list any important changes.
- *
- * @see     https://woocommerce.com/document/template-structure/
- * @package WooCommerce\Templates
- * @version 3.6.0
- * @global WC_Checkout $checkout
  */
 
 defined( 'ABSPATH' ) || exit;
-?>
+@endphp
+
 <div class="woocommerce-billing-fields">
-	<?php if ( wc_ship_to_billing_address_only() && WC()->cart->needs_shipping() ) : ?>
+    @php do_action( 'woocommerce_before_checkout_billing_form', $checkout ); @endphp
 
-		<h3><?php esc_html_e( 'Billing &amp; Shipping', 'woocommerce' ); ?></h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-5">
+        {{-- First Name --}}
+        <flux:input 
+            :label="__('First name', 'woocommerce')" 
+            name="billing_first_name" 
+            id="billing_first_name" 
+            :value="$checkout->get_value('billing_first_name')" 
+            autocomplete="given-name"
+            required
+        />
 
-	<?php else : ?>
+        {{-- Last Name --}}
+        <flux:input 
+            :label="__('Last name', 'woocommerce')" 
+            name="billing_last_name" 
+            id="billing_last_name" 
+            :value="$checkout->get_value('billing_last_name')" 
+            autocomplete="family-name"
+            required
+        />
 
-		<h3><?php esc_html_e( 'Billing details', 'woocommerce' ); ?></h3>
+        {{-- Company (Optional) --}}
+        <div class="md:col-span-2">
+            <flux:input 
+                :label="__('Company name (optional)', 'woocommerce')" 
+                name="billing_company" 
+                id="billing_company" 
+                :value="$checkout->get_value('billing_company')" 
+                autocomplete="organization"
+            />
+        </div>
 
-	<?php endif; ?>
+        {{-- Country / Region --}}
+        <div class="md:col-span-2">
+            @php
+                $countries = WC()->countries->get_allowed_countries();
+                $current_country = $checkout->get_value('billing_country');
+            @endphp
+            <flux:select 
+                :label="__('Country / Region', 'woocommerce')" 
+                name="billing_country" 
+                id="billing_country"
+                required
+            >
+                @foreach($countries as $code => $name)
+                    <option value="{{ $code }}" {{ $current_country === $code ? 'selected' : '' }}>{{ $name }}</option>
+                @endforeach
+            </flux:select>
+        </div>
 
-	<?php do_action( 'woocommerce_before_checkout_billing_form', $checkout ); ?>
+        {{-- Street Address --}}
+        <div class="md:col-span-2 space-y-3">
+            <flux:input 
+                :label="__('Street address', 'woocommerce')" 
+                name="billing_address_1" 
+                id="billing_address_1" 
+                :value="$checkout->get_value('billing_address_1')" 
+                :placeholder="esc_attr__( 'House number and street name', 'woocommerce' )"
+                autocomplete="address-line1"
+                required
+            />
+            <flux:input 
+                name="billing_address_2" 
+                id="billing_address_2" 
+                :value="$checkout->get_value('billing_address_2')" 
+                :placeholder="esc_attr__( 'Apartment, suite, unit, etc. (optional)', 'woocommerce' )"
+                autocomplete="address-line2"
+            />
+        </div>
 
-	<div class="woocommerce-billing-fields__field-wrapper">
-		<?php
-		$fields = $checkout->get_checkout_fields( 'billing' );
+        {{-- Town / City --}}
+        <flux:input 
+            :label="__('Town / City', 'woocommerce')" 
+            name="billing_city" 
+            id="billing_city" 
+            :value="$checkout->get_value('billing_city')" 
+            autocomplete="address-level2"
+            required
+        />
 
-		foreach ( $fields as $key => $field ) {
-			woocommerce_form_field( $key, $field, $checkout->get_value( $key ) );
-		}
-		?>
-	</div>
+        {{-- State / County --}}
+        <flux:input 
+            :label="__('State / County', 'woocommerce')" 
+            name="billing_state" 
+            id="billing_state" 
+            :value="$checkout->get_value('billing_state')" 
+            autocomplete="address-level1"
+            required
+        />
 
-	<?php do_action( 'woocommerce_after_checkout_billing_form', $checkout ); ?>
+        {{-- Postcode / ZIP --}}
+        <flux:input 
+            :label="__('Postcode / ZIP', 'woocommerce')" 
+            name="billing_postcode" 
+            id="billing_postcode" 
+            :value="$checkout->get_value('billing_postcode')" 
+            autocomplete="postal-code"
+            required
+        />
+
+        {{-- Phone --}}
+        <flux:input 
+            type="tel"
+            :label="__('Phone', 'woocommerce')" 
+            name="billing_phone" 
+            id="billing_phone" 
+            :value="$checkout->get_value('billing_phone')" 
+            autocomplete="tel"
+            required
+        />
+
+        {{-- Email Address --}}
+        <div class="md:col-span-2">
+            <flux:input 
+                type="email"
+                :label="__('Email address', 'woocommerce')" 
+                name="billing_email" 
+                id="billing_email" 
+                :value="$checkout->get_value('billing_email')" 
+                autocomplete="email"
+                required
+            />
+        </div>
+
+        {{-- Fallback for any other fields --}}
+        @php
+            $all_fields = $checkout->get_checkout_fields( 'billing' );
+            $handled_keys = ['billing_first_name', 'billing_last_name', 'billing_company', 'billing_country', 'billing_address_1', 'billing_address_2', 'billing_city', 'billing_state', 'billing_postcode', 'billing_phone', 'billing_email'];
+        @endphp
+
+        @foreach ( $all_fields as $key => $field )
+            @if(!in_array($key, $handled_keys))
+                <div class="checkout-field-wrapper group">
+                    @php woocommerce_form_field( $key, $field, $checkout->get_value( $key ) ); @endphp
+                </div>
+            @endif
+        @endforeach
+    </div>
+
+    @php do_action( 'woocommerce_after_checkout_billing_form', $checkout ); @endphp
 </div>
 
-<?php if ( ! is_user_logged_in() && $checkout->is_registration_enabled() ) : ?>
-	<div class="woocommerce-account-fields">
-		<?php if ( ! $checkout->is_registration_required() ) : ?>
-
+@if ( ! is_user_logged_in() && $checkout->is_registration_enabled() )
+	<div class="woocommerce-account-fields pt-10 mt-10 border-t border-slate-100">
+		@if ( ! $checkout->is_registration_required() )
 			<p class="form-row form-row-wide create-account">
-				<label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox">
-					<input class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox" id="createaccount" <?php checked( ( true === $checkout->get_value( 'createaccount' ) || ( true === apply_filters( 'woocommerce_create_account_default_checked', false ) ) ), true ); ?> type="checkbox" name="createaccount" value="1" /> <span><?php esc_html_e( 'Create an account?', 'woocommerce' ); ?></span>
+				<label class="flex items-center gap-3 cursor-pointer group/acc">
+                    <div class="relative flex items-center">
+					    <input class="peer w-6 h-6 rounded-lg border-slate-200 text-primary focus:ring-primary/20 transition-all bg-slate-50 appearance-none border checked:bg-primary checked:border-primary shadow-sm" id="createaccount" {{ (true === $checkout->get_value( 'createaccount' ) || ( true === apply_filters( 'woocommerce_create_account_default_checked', false ) )) ? 'checked' : '' }} type="checkbox" name="createaccount" value="1" /> 
+                        <flux:icon.check variant="mini" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity" />
+                    </div>
+                    <span class="text-base font-black text-slate-900 group-hover/acc:text-primary transition-colors flex items-center gap-2">
+                        <flux:icon.user-plus variant="mini" class="text-slate-400 group-hover/acc:text-primary" />
+                        {{ __('Create an account?', 'woocommerce') }}
+                    </span>
 				</label>
 			</p>
+		@endif
 
-		<?php endif; ?>
+		@php do_action( 'woocommerce_before_checkout_registration_form', $checkout ); @endphp
 
-		<?php do_action( 'woocommerce_before_checkout_registration_form', $checkout ); ?>
-
-		<?php if ( $checkout->get_checkout_fields( 'account' ) ) : ?>
-
-			<div class="create-account">
-				<?php foreach ( $checkout->get_checkout_fields( 'account' ) as $key => $field ) : ?>
-					<?php woocommerce_form_field( $key, $field, $checkout->get_value( $key ) ); ?>
-				<?php endforeach; ?>
+		@if ( $checkout->get_checkout_fields( 'account' ) )
+			<div class="create-account grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-4 mt-8 p-6 bg-slate-50/50 rounded-2xl border border-slate-100">
+				@foreach ( $checkout->get_checkout_fields( 'account' ) as $key => $field )
+					<div class="checkout-field-wrapper group">
+                        @php woocommerce_form_field( $key, $field, $checkout->get_value( $key ) ); @endphp
+                    </div>
+				@endforeach
 				<div class="clear"></div>
 			</div>
+		@endif
 
-		<?php endif; ?>
-
-		<?php do_action( 'woocommerce_after_checkout_registration_form', $checkout ); ?>
+		@php do_action( 'woocommerce_after_checkout_registration_form', $checkout ); @endphp
 	</div>
-<?php endif; ?>
+@endif

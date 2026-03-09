@@ -63,95 +63,80 @@ if ( $show_downloads ) {
 	);
 }
 ?>
-<section class="woocommerce-order-details">
-	<?php do_action( 'woocommerce_order_details_before_order_table', $order ); ?>
+<section class="woocommerce-order-details mt-10 md:mt-16">
+    @php do_action( 'woocommerce_order_details_before_order_table', $order ); @endphp
 
-	<h2 class="woocommerce-order-details__title"><?php esc_html_e( 'Order details', 'woocommerce' ); ?></h2>
+    <div class="bg-white border border-slate-100 rounded-[2rem] shadow-sm overflow-hidden mb-10">
+        <div class="px-8 py-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/30">
+            <flux:heading size="lg" class="!text-slate-900 font-black uppercase tracking-tight">
+                @php esc_html_e( 'Resumen del Pedido', 'woocommerce' ); @endphp
+            </flux:heading>
+            <flux:badge variant="subtle" size="sm" class="!rounded-lg !px-3 font-bold">@php echo count($order_items); @endphp Artículos</flux:badge>
+        </div>
 
-	<table class="woocommerce-table woocommerce-table--order-details shop_table order_details">
+        <!-- Clean Items List -->
+        <div class="divide-y divide-slate-50">
+            @php
+            do_action( 'woocommerce_order_details_before_order_table_items', $order );
 
-		<thead>
-			<tr>
-				<th class="woocommerce-table__product-name product-name"><?php esc_html_e( 'Product', 'woocommerce' ); ?></th>
-				<th class="woocommerce-table__product-table product-total"><?php esc_html_e( 'Total', 'woocommerce' ); ?></th>
-			</tr>
-		</thead>
+            foreach ( $order_items as $item_id => $item ) {
+                $product = $item->get_product();
 
-		<tbody>
-			<?php
-			do_action( 'woocommerce_order_details_before_order_table_items', $order );
+                wc_get_template(
+                    'order/order-details-item.php',
+                    array(
+                        'order'              => $order,
+                        'item_id'            => $item_id,
+                        'item'               => $item,
+                        'show_purchase_note' => $show_purchase_note,
+                        'purchase_note'      => $product ? $product->get_purchase_note() : '',
+                        'product'            => $product,
+                    )
+                );
+            }
 
-			foreach ( $order_items as $item_id => $item ) {
-				$product = $item->get_product();
+            do_action( 'woocommerce_order_details_after_order_table_items', $order );
+            @endphp
+        </div>
 
-				wc_get_template(
-					'order/order-details-item.php',
-					array(
-						'order'              => $order,
-						'item_id'            => $item_id,
-						'item'               => $item,
-						'show_purchase_note' => $show_purchase_note,
-						'purchase_note'      => $product ? $product->get_purchase_note() : '',
-						'product'            => $product,
-					)
-				);
-			}
+        <!-- Consolidated Totals Section -->
+        <div class="p-8 md:p-10 bg-slate-50/50 border-t border-slate-100">
+            <div class="max-w-sm ml-auto space-y-4">
+                @foreach ( $order->get_order_item_totals() as $key => $total )
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">{!! wp_strip_all_tags($total['label']) !!}</span>
+                        <span class="font-black text-slate-900 tabular-nums {{ strpos($key, 'total') !== false ? 'text-2xl tracking-tighter' : 'text-sm' }}">
+                            {!! $total['value'] !!}
+                        </span>
+                    </div>
+                @endforeach
 
-			do_action( 'woocommerce_order_details_after_order_table_items', $order );
-			?>
-		</tbody>
+                @if ( $order->get_customer_note() )
+                    <div class="mt-8 p-4 bg-white rounded-2xl border border-slate-100 text-sm text-slate-500 italic">
+                        <span class="block text-[8px] font-black uppercase tracking-widest text-slate-400 mb-1">Tu nota:</span>
+                        {!! wp_kses_post( nl2br( $order->get_customer_note() ) ) !!}
+                    </div>
+                @endif
+            </div>
 
-		<?php
-		if ( ! empty( $actions ) ) :
-			?>
-		<tfoot>
-			<tr>
-				<th class="order-actions--heading"><?php esc_html_e( 'Actions', 'woocommerce' ); ?>:</th>
-				<td>
-						<?php
-						$wp_button_class = wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '';
-						foreach ( $actions as $key => $action ) { // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
-							if ( empty( $action['aria-label'] ) ) {
-								// Generate the aria-label based on the action name.
-								/* translators: %1$s Action name, %2$s Order number. */
-								$action_aria_label = sprintf( __( '%1$s order number %2$s', 'woocommerce' ), $action['name'], $order->get_order_number() );
-							} else {
-								$action_aria_label = $action['aria-label'];
-							}
-								echo '<a href="' . esc_url( $action['url'] ) . '" class="woocommerce-button' . esc_attr( $wp_button_class ) . ' button ' . sanitize_html_class( $key ) . ' order-actions-button " aria-label="' . esc_attr( $action_aria_label ) . '">' . esc_html( $action['name'] ) . '</a>';
-								unset( $action_aria_label );
-						}
-						?>
-					</td>
-				</tr>
-			</tfoot>
-			<?php endif ?>
-		<tfoot>
-			<?php
-			foreach ( $order->get_order_item_totals() as $key => $total ) {
-				?>
-					<tr>
-						<th scope="row"><?php echo esc_html( $total['label'] ); ?></th>
-						<td><?php echo wp_kses_post( $total['value'] ); ?></td>
-					</tr>
-					<?php
-			}
-			?>
-			<?php if ( $order->get_customer_note() ) : ?>
-				<tr>
-					<th><?php esc_html_e( 'Note:', 'woocommerce' ); ?></th>
-					<td>
-					<?php
-					$customer_note = wc_wptexturize_order_note( $order->get_customer_note() );
-					echo wp_kses( nl2br( $customer_note ), array( 'br' => array() ) );
-					?>
-					</td>
-				</tr>
-			<?php endif; ?>
-		</tfoot>
-	</table>
+            @if ( ! empty( $actions ) )
+                <div class="mt-8 pt-8 border-t border-slate-100 flex flex-wrap gap-4">
+                    @php
+                    foreach ( $actions as $key => $action ) {
+                        echo sprintf(
+                            '<flux:button href="%s" variant="subtle" size="sm" class="!rounded-xl border !border-slate-200" aria-label="%s">%s</flux:button>',
+                            esc_url( $action['url'] ),
+                            esc_attr( $action['aria-label'] ?? $action['name'] ),
+                            esc_html( $action['name'] )
+                        );
+                    }
+                    @endphp
+                </div>
+            @endif
+        </div>
+    </div>
 
-	<?php do_action( 'woocommerce_order_details_after_order_table', $order ); ?>
+    @php do_action( 'woocommerce_order_details_after_order_table', $order ); @endphp
 </section>
 
 <?php

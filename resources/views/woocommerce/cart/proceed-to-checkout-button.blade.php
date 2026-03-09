@@ -1,39 +1,27 @@
 @php
-/**
- * WooCommerce Template Override: cart/proceed-to-checkout-button.php
- * Auto-generated from WooCommerce plugin template.
- * TODO: Personalizar con tu diseño Tailwind/Flux.
- * @version 7.0.1
- */
-defined('ABSPATH') || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 @endphp
 
-{{-- TODO: Personalizar este template con tu diseño --}}
+<div class="relative group/checkout">
+    {{-- Button Glow Effect --}}
+    <div class="absolute inset-0 bg-primary-600 rounded-xl blur-lg opacity-10 group-hover/checkout:opacity-30 transition-opacity duration-500"></div>
 
-<?php
-/**
- * Proceed to checkout button
- *
- * Contains the markup for the proceed to checkout button on the cart.
- *
- * This template can be overridden by copying it to yourtheme/woocommerce/cart/proceed-to-checkout-button.php.
- *
- * HOWEVER, on occasion WooCommerce will need to update template files and you
- * (the theme developer) will need to copy the new files to your theme to
- * maintain compatibility. We try to do this as little as possible, but it does
- * happen. When this occurs the version of the template file will be bumped and
- * the readme will list any important changes.
- *
- * @see     https://woocommerce.com/document/template-structure/
- * @package WooCommerce\Templates
- * @version 7.0.1
- */
-
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
-}
-?>
-
-<a href="<?php echo esc_url( wc_get_checkout_url() ); ?>" class="checkout-button button alt wc-forward<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>">
-	<?php esc_html_e( 'Proceed to checkout', 'woocommerce' ); ?>
-</a>
+    <flux:button 
+        as="link" 
+        href="{{ esc_url( wc_get_checkout_url() ) }}" 
+        wire:navigate
+        variant="primary" 
+        size="base" 
+        class="w-full h-12 !rounded-xl !text-sm font-bold uppercase tracking-[0.15em] shadow-lg relative z-10 overflow-hidden group/btn border-none !text-white"
+    >
+        {{-- Luxury Gradient Overlay --}}
+        <div class="absolute inset-0 bg-gradient-to-r from-orange-400 to-orange-600 opacity-90 group-hover/btn:opacity-100 transition-opacity duration-500"></div>
+        
+        <div class="relative z-20 flex items-center justify-center gap-3">
+            {{ __('Proceed to checkout', 'woocommerce') }}
+            <flux:icon.arrow-right-circle variant="mini" class="w-5 h-5 transition-transform duration-500 group-hover/btn:translate-x-1.5" />
+        </div>
+    </flux:button>
+</div>

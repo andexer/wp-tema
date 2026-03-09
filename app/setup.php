@@ -140,7 +140,7 @@ add_action('after_setup_theme', function () {
 	/**
 	 * Enable WooCommerce support.
 	 */
-	//add_theme_support('woocommerce');
+	add_theme_support('woocommerce');
 }, 20);
 
 /**

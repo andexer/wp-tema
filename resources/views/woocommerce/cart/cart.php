@@ -1,13 +1,14 @@
 <?php
 
 /**
- * Cart Page Override
+ * WooCommerce Template Override: cart/cart.php
  *
- * Este archivo sirve como puente para que WooCommerce detecte el override del carrito,
- * delegando el renderizado real a la plantilla Blade con animación SPA y componentes Flux.
+ * Este archivo sirve como puente para que WooCommerce detecte el override.
+ * El renderizado real se delega a la plantilla Blade.
+ *
+ * @see cart/cart.blade.php
  */
 
 defined('ABSPATH') || exit;
 
-// Renderizamos la vista Blade personalizada para el carrito
 echo view('woocommerce.cart.cart', get_defined_vars())->render();

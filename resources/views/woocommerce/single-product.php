@@ -1,14 +1,14 @@
 <?php
 
 /**
- * WooCommerce Template Override: cart/cart-shipping.php
+ * WooCommerce Template Override: single-product.php
  *
  * Este archivo sirve como puente para que WooCommerce detecte el override.
  * El renderizado real se delega a la plantilla Blade.
  *
- * @see cart/cart-shipping.blade.php
+ * @see single-product.php
  */
 
 defined('ABSPATH') || exit;
 
-echo view('woocommerce.cart.cart-shipping', get_defined_vars())->render();
+echo view('woocommerce.single-product', get_defined_vars())->render();

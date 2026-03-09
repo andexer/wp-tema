@@ -10,7 +10,7 @@ defined('ABSPATH') || exit;
 
 {{-- TODO: Personalizar este template con tu diseño --}}
 
-<?php
+@php
 /**
  * Output a single payment method
  *
@@ -30,16 +30,26 @@ defined('ABSPATH') || exit;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-?>
-<li class="wc_payment_method payment_method_<?php echo esc_attr( $gateway->id ); ?>">
-	<input id="payment_method_<?php echo esc_attr( $gateway->id ); ?>" type="radio" class="input-radio" name="payment_method" value="<?php echo esc_attr( $gateway->id ); ?>" <?php checked( $gateway->chosen, true ); ?> data-order_button_text="<?php echo esc_attr( $gateway->order_button_text ); ?>" />
+@endphp
 
-	<label for="payment_method_<?php echo esc_attr( $gateway->id ); ?>">
-		<?php echo $gateway->get_title(); /* phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped */ ?> <?php echo $gateway->get_icon(); /* phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped */ ?>
+<li class="wc_payment_method payment_method_{{ esc_attr( $gateway->id ) }} group">
+	<input id="payment_method_{{ esc_attr( $gateway->id ) }}" type="radio" class="input-radio peer" name="payment_method" value="{{ esc_attr( $gateway->id ) }}" @php checked( $gateway->chosen, true ); @endphp data-order_button_text="{{ esc_attr( $gateway->order_button_text ) }}" />
+
+	<label for="payment_method_{{ esc_attr( $gateway->id ) }}" class="cursor-pointer">
+		<div class="flex-1 flex items-center justify-between gap-4">
+            <span class="font-bold text-slate-900 leading-tight">
+                {!! $gateway->get_title() !!}
+            </span>
+            <div class="payment-icon opacity-60 group-hover:opacity-100 transition-opacity scale-90 md:scale-100">
+                {!! $gateway->get_icon() !!}
+            </div>
+        </div>
 	</label>
-	<?php if ( $gateway->has_fields() || $gateway->get_description() ) : ?>
-		<div class="payment_box payment_method_<?php echo esc_attr( $gateway->id ); ?>" <?php if ( ! $gateway->chosen ) : /* phpcs:ignore Squiz.ControlStructures.ControlSignature.NewlineAfterOpenBrace */ ?>style="display:none;"<?php endif; /* phpcs:ignore Squiz.ControlStructures.ControlSignature.NewlineAfterOpenBrace */ ?>>
-			<?php $gateway->payment_fields(); ?>
+
+	@if ( $gateway->has_fields() || $gateway->get_description() )
+		<div class="payment_box payment_method_{{ esc_attr( $gateway->id ) }}" @if ( ! $gateway->chosen ) style="display:none;" @endif>
+			@php $gateway->payment_fields(); @endphp
 		</div>
-	<?php endif; ?>
+	@endif
 </li>
+

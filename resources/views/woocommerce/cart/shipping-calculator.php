@@ -6,7 +6,7 @@
  * Este archivo sirve como puente para que WooCommerce detecte el override.
  * El renderizado real se delega a la plantilla Blade.
  *
- * @see cart/shipping-calculator.php
+ * @see cart/shipping-calculator.blade.php
  */
 
 defined('ABSPATH') || exit;

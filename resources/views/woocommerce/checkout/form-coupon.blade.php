@@ -10,7 +10,7 @@ defined('ABSPATH') || exit;
 
 {{-- TODO: Personalizar este template con tu diseño --}}
 
-<?php
+@php
 /**
  * Checkout coupon form
  *
@@ -32,32 +32,29 @@ defined( 'ABSPATH' ) || exit;
 if ( ! wc_coupons_enabled() ) { // @codingStandardsIgnoreLine.
 	return;
 }
+@endphp
 
-?>
-<div class="woocommerce-form-coupon-toggle">
-	<?php
-		/**
-		 * Filter checkout coupon message.
-		 *
-		 * @param string $message coupon message.
-		 * @return string Filtered message.
-		 *
-		 * @since 1.0.0
-		 */
-		wc_print_notice( apply_filters( 'woocommerce_checkout_coupon_message', esc_html__( 'Have a coupon?', 'woocommerce' ) . ' <a href="#" role="button" aria-label="' . esc_attr__( 'Enter your coupon code', 'woocommerce' ) . '" aria-controls="woocommerce-checkout-form-coupon" aria-expanded="false" class="showcoupon">' . esc_html__( 'Click here to enter your code', 'woocommerce' ) . '</a>' ), 'notice' );
-	?>
+<div class="woocommerce-form-coupon-toggle mb-4">
+    <div class="flex items-center gap-3 p-4 !bg-slate-50 border border-slate-100 rounded-xl shadow-sm group">
+        <flux:icon.tag variant="mini" class="text-primary group-hover:scale-110 transition-transform" />
+        <div class="text-sm font-medium text-slate-600">
+            {{ __('Have a coupon?', 'woocommerce') }} 
+            <a href="#" role="button" class="showcoupon font-black text-slate-900 hover:text-primary transition-all underline decoration-primary/30 underline-offset-4">
+                {{ __('Click here to enter your code', 'woocommerce') }}
+            </a>
+        </div>
+    </div>
 </div>
 
-<form class="checkout_coupon woocommerce-form-coupon" method="post" style="display:none" id="woocommerce-checkout-form-coupon">
-
-	<p class="form-row form-row-first">
-		<label for="coupon_code" class="screen-reader-text"><?php esc_html_e( 'Coupon:', 'woocommerce' ); ?></label>
-		<input type="text" name="coupon_code" class="input-text" placeholder="<?php esc_attr_e( 'Coupon code', 'woocommerce' ); ?>" id="coupon_code" value="" />
-	</p>
-
-	<p class="form-row form-row-last">
-		<button type="submit" class="button<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>" name="apply_coupon" value="<?php esc_attr_e( 'Apply coupon', 'woocommerce' ); ?>"><?php esc_html_e( 'Apply coupon', 'woocommerce' ); ?></button>
-	</p>
-
-	<div class="clear"></div>
+<form class="checkout_coupon woocommerce-form-coupon !mt-4 !mb-8 !p-4 md:!p-6 !bg-white border border-slate-200 rounded-2xl shadow-lg !hidden" method="post" id="woocommerce-checkout-form-coupon">
+    <flux:subheading class="mb-4 !text-slate-900 !font-black uppercase tracking-wider">{{ __('Enter your coupon code', 'woocommerce') }}</flux:subheading>
+    
+    <div class="flex flex-col md:flex-row gap-3">
+        <div class="flex-1">
+            <flux:input name="coupon_code" id="coupon_code" placeholder="{{ esc_attr__( 'Coupon code', 'woocommerce' ) }}" value="" class="!bg-slate-50" />
+        </div>
+        <flux:button type="submit" variant="primary" class="font-black uppercase tracking-widest" name="apply_coupon" value="{{ esc_attr__( 'Apply coupon', 'woocommerce' ) }}">
+            {{ __('Apply', 'woocommerce') }}
+        </flux:button>
+    </div>
 </form>

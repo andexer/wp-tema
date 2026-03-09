@@ -1,246 +1,252 @@
-@php(defined( 'ABSPATH' ) || exit)
+@php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+@endphp
 
-@php(do_action('woocommerce_before_cart'))
+@php
+do_action('woocommerce_before_cart');
+@endphp
 
-{{-- Spacer --}}
-<div class="my-8 md:my-16"></div>
+<div class="max-w-[1400px] mx-auto px-2 sm:px-4 lg:px-8 py-6 md:py-12">
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" 
-     x-data="{ show: false }" 
-     x-init="setTimeout(() => show = true, 50)">
+    <div class="mb-6 md:mb-10 text-center relative">
+        <div class="inline-block px-3 py-1 mb-2 rounded-full bg-primary-50 text-primary-600 font-bold text-[9px] md:text-xs uppercase tracking-[0.2em]">
+            {{ __('Checkout Process', 'woocommerce') }}
+        </div>
+        <flux:heading size="xl" class="!text-xl md:!text-3xl lg:!text-4xl font-black tracking-tight text-slate-900 drop-shadow-sm">
+            {{ __('Your Shopping Bag', 'woocommerce') }}
+        </flux:heading>
+        <div class="mt-1 md:mt-3 text-slate-500 text-xs md:text-sm font-medium max-w-lg mx-auto px-2">
+            {{ __('Review your items and proceed to secure checkout.', 'detodo24') }}
+        </div>
+    </div>
 
-    <flux:heading size="xl" class="mb-8 text-center" 
-        x-show="show" 
-        x-transition:enter="transition ease-out duration-500 delay-100"
-        x-transition:enter-start="opacity-0 translate-y-4"
-        x-transition:enter-end="opacity-100 translate-y-0"
-    >
-        {{ __('Shopping Cart', 'woocommerce') }}
-    </flux:heading>
-
-    <div class="flex flex-col lg:flex-row gap-8 lg:gap-12"
-         x-show="show"
-         x-transition:enter="transition ease-out duration-700 delay-200"
-         x-transition:enter-start="opacity-0 translate-y-8"
-         x-transition:enter-end="opacity-100 translate-y-0"
-    >
+    <div class="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
         
-        {{-- ==================== COLUMNA IZQUIERDA: CARRO ==================== --}}
-        <div class="w-full lg:w-2/3">
+        {{-- ==================== LEFT COLUMN: CART ITEMS ==================== --}}
+        <div class="w-full lg:w-[55%]">
             <form class="woocommerce-cart-form" action="{{ esc_url( wc_get_cart_url() ) }}" method="post">
-                @php(do_action('woocommerce_before_cart_table'))
+                @php
+                do_action('woocommerce_before_cart_table');
+                @endphp
 
-                <flux:card class="p-0 overflow-hidden">
-                    <flux:table class="shop_table shop_table_responsive cart woocommerce-cart-form__contents">
-                        <thead>
-                            <tr class="text-sm font-semibold text-slate-500 border-b border-slate-200">
-                                <th class="pb-3 text-left w-2/5">{{ __('Product', 'woocommerce') }}</th>
-                                <th class="pb-3 text-left">{{ __('Price', 'woocommerce') }}</th>
-                                <th class="pb-3 text-center">{{ __('Quantity', 'woocommerce') }}</th>
-                                <th class="pb-3 text-right">{{ __('Subtotal', 'woocommerce') }}</th>
-                                <th class="pb-3 w-10"></th>
-                            </tr>
-                        </thead>
+                <div class="space-y-6">
+                    @php
+                    do_action('woocommerce_before_cart_contents');
+                    @endphp
 
-                        <tbody class="divide-y divide-slate-100">
-                            @php(do_action('woocommerce_before_cart_contents'))
+                    @foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item )
+                        @php
+                        $_product   = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
+                        $product_id = apply_filters( 'woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key );
+                        $product_name = apply_filters( 'woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key );
+                        @endphp
 
-                            <?php foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) : ?>
-                                @php
-                                $_product   = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
-                                $product_id = apply_filters( 'woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key );
-                                $product_name = apply_filters( 'woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key );
-                                @endphp
+                        @if ( $_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters( 'woocommerce_cart_item_visible', true, $cart_item, $cart_item_key ) )
+                            @php
+                            $product_permalink = apply_filters( 'woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink( $cart_item ) : '', $cart_item, $cart_item_key );
+                            @endphp
 
-                                <?php if ( $_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters( 'woocommerce_cart_item_visible', true, $cart_item, $cart_item_key ) ) : ?>
-                                    @php
-                                    $product_permalink = apply_filters( 'woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink( $cart_item ) : '', $cart_item, $cart_item_key );
-                                    @endphp
-
-                                    <tr class="woocommerce-cart-form__cart-item {{ esc_attr( apply_filters( 'woocommerce_cart_item_class', 'cart_item group transition-colors hover:bg-slate-50/50', $cart_item, $cart_item_key ) ) }}">
-
-                                        {{-- THUMBNAIL & NOMBRE --}}
-                                        <td class="py-6 flex flex-col md:flex-row md:items-center gap-4 product-name" data-title="{{ esc_attr__( 'Product', 'woocommerce' ) }}">
+                            <div class="woocommerce-cart-form__cart-item {{ esc_attr( apply_filters( 'woocommerce_cart_item_class', 'cart_item group', $cart_item, $cart_item_key ) ) }}">
+                                <flux:card class="p-3 md:p-5 relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/5 hover:-translate-y-0.5 bg-white/70 backdrop-blur-xl border-none ring-1 ring-slate-200/50">
+                                    <div class="flex flex-row md:items-center gap-3 md:gap-6">
+                                        
+                                        {{-- THUMBNAIL --}}
+                                        <div class="shrink-0 relative group/thumb">
                                             @php
-                                            $thumbnail = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image('woocommerce_gallery_thumbnail', ['class' => 'w-16 h-16 md:w-20 md:h-20 object-cover rounded-xl shadow-sm']), $cart_item, $cart_item_key );
+                                            $thumbnail = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image('woocommerce_gallery_thumbnail', ['class' => 'w-14 h-14 md:w-24 md:h-24 object-cover rounded-xl md:rounded-2xl shadow-sm md:shadow-md border border-slate-100 transition-transform duration-500 group-hover/thumb:scale-105']), $cart_item, $cart_item_key );
                                             @endphp
                                             
-                                            <div class="product-thumbnail shrink-0">
-                                                @if ( ! $product_permalink )
+                                            @if ( ! $product_permalink )
+                                                {!! $thumbnail !!}
+                                            @else
+                                                <a href="{{ esc_url( $product_permalink ) }}" wire:navigate class="block relative overflow-hidden rounded-3xl">
                                                     {!! $thumbnail !!}
-                                                @else
-                                                    <a href="{{ esc_url( $product_permalink ) }}" class="block transition-transform hover:scale-105 duration-300">
-                                                        {!! $thumbnail !!}
-                                                    </a>
-                                                @endif
-                                            </div>
+                                                    <div class="absolute inset-0 bg-primary-600/0 group-hover/thumb:bg-primary-600/10 transition-colors duration-500"></div>
+                                                </a>
+                                            @endif
 
-                                            <div>
+                                            {{-- Remove Button Overlay (Desktop Only) --}}
+                                            @php
+                                            $remove_url = esc_url( wc_get_cart_remove_url( $cart_item_key ) );
+                                            $remove_label = esc_attr( sprintf( __( 'Remove %s from cart', 'woocommerce' ), wp_strip_all_tags( $product_name ) ) );
+                                            @endphp
+                                            <a href="{{ $remove_url }}" 
+                                               class="absolute -top-1.5 -left-1.5 md:-top-2 md:-left-2 bg-white text-red-500 p-1 md:p-1.5 rounded-full shadow-md md:opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-red-50 hover:scale-110 z-20 border border-slate-100"
+                                               aria-label="{{ $remove_label }}" 
+                                               data-product_id="{{ esc_attr( $product_id ) }}" 
+                                               data-product_sku="{{ esc_attr( $_product->get_sku() ) }}">
+                                               <flux:icon.x-mark variant="mini" class="w-3.5 h-3.5 md:w-4 md:h-4" />
+                                            </a>
+                                        </div>
+
+                                        {{-- DETAILS --}}
+                                        <div class="flex-grow flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-4 min-w-0">
+                                            <div class="space-y-0.5 md:space-y-1">
                                                 @if ( ! $product_permalink )
-                                                    <span class="font-bold text-slate-800 text-base md:text-lg">{!! wp_kses_post( $product_name . '&nbsp;' ) !!}</span>
+                                                    <span class="block font-black text-slate-900 text-sm md:text-base tracking-tight leading-tight truncate">{!! wp_kses_post( $product_name ) !!}</span>
                                                 @else
-                                                    <a href="{{ esc_url( $product_permalink ) }}" class="font-bold text-slate-800 text-base md:text-lg hover:text-indigo-600 transition-colors">
+                                                    <a href="{{ esc_url( $product_permalink ) }}" wire:navigate class="block font-black text-slate-900 text-sm md:text-base tracking-tight leading-tight hover:text-primary-600 transition-colors duration-300 truncate">
                                                         {!! wp_kses_post( apply_filters( 'woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key ) ) !!}
                                                     </a>
                                                 @endif
 
                                                 @php
-                                                    do_action('woocommerce_after_cart_item_name', $cart_item, $cart_item_key);
+                                                do_action('woocommerce_after_cart_item_name', $cart_item, $cart_item_key);
                                                 @endphp
 
-                                                <div class="mt-1 text-xs md:text-sm text-slate-500">
+                                                <div class="text-xs font-bold uppercase tracking-widest text-slate-400">
                                                     {!! wc_get_formatted_cart_item_data( $cart_item ) !!}
                                                 </div>
 
-                                                <?php if ( $_product->backorders_require_notification() && $_product->is_on_backorder( $cart_item['quantity'] ) ) : ?>
-                                                    <span class="mt-2 text-xs text-amber-600 bg-amber-50 px-2 py-1 rounded-md font-medium border border-amber-200">
-                                                        {!! wp_kses_post( apply_filters( 'woocommerce_cart_item_backorder_notification', esc_html__( 'Available on backorder', 'woocommerce' ), $product_id ) ) !!}
-                                                    </span>
-                                                <?php endif; ?>
+                                                @if ( $_product->backorders_require_notification() && $_product->is_on_backorder( $cart_item['quantity'] ) )
+                                                    <div class="mt-4">
+                                                        <flux:badge color="amber" size="sm" variant="subtle" class="font-black px-3 py-1 rounded-full uppercase tracking-tighter">
+                                                            {!! wp_kses_post( apply_filters( 'woocommerce_cart_item_backorder_notification', esc_html__( 'Available on backorder', 'woocommerce' ), $product_id ) ) !!}
+                                                        </flux:badge>
+                                                    </div>
+                                                @endif
 
-                                                {{-- Mobile price view --}}
-                                                <div class="md:hidden mt-2 font-semibold text-indigo-600">
-                                                    {!! apply_filters( 'woocommerce_cart_item_price', WC()->cart->get_product_price( $_product ), $cart_item, $cart_item_key ) !!}
+                                                <div class="hidden sm:block text-slate-500 font-medium text-[10px] md:text-xs md:max-w-xs line-clamp-1">
+                                                    {!! $_product->get_short_description() ?: __('Selected item for you.', 'detodo24') !!}
                                                 </div>
                                             </div>
-                                        </td>
 
-                                        {{-- PRECIO --}}
-                                        <td class="hidden md:table-cell py-6 product-price font-medium text-slate-600 align-middle" data-title="{{ esc_attr__( 'Price', 'woocommerce' ) }}">
-                                            {!! apply_filters( 'woocommerce_cart_item_price', WC()->cart->get_product_price( $_product ), $cart_item, $cart_item_key ) !!}
-                                        </td>
+                                            {{-- PRICE & QUANTITY --}}
+                                            <div class="flex flex-col-reverse sm:flex-col items-start sm:items-end justify-between gap-2 mt-1 md:mt-0 border-slate-100 sm:border-l sm:pl-4 bg-slate-50/30 sm:bg-transparent -mx-2 sm:mx-0 p-2 sm:p-0 rounded-lg sm:rounded-none">
+                                                <div class="text-left sm:text-right w-full sm:w-auto flex flex-row sm:flex-col items-center sm:items-end justify-between sm:justify-start">
+                                                    <div class="text-[9px] md:text-[10px] font-bold text-slate-400 uppercase tracking-widest sm:mb-0.5">{{ __('Subtotal', 'woocommerce') }}</div>
+                                                    <div class="text-base md:text-xl font-bold text-primary-600 tracking-tighter ml-auto sm:ml-0">
+                                                        {!! apply_filters( 'woocommerce_cart_item_subtotal', WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ), $cart_item, $cart_item_key ) !!}
+                                                    </div>
+                                                </div>
 
-                                        {{-- CANTIDAD --}}
-                                        <td class="py-6 product-quantity text-center align-middle" data-title="{{ esc_attr__( 'Quantity', 'woocommerce' ) }}">
-                                            <div class="flex justify-center">
-                                                @php
-                                                if ( $_product->is_sold_individually() ) {
-                                                    $min_quantity = 1;
-                                                    $max_quantity = 1;
-                                                } else {
-                                                    $min_quantity = 0;
-                                                    $max_quantity = $_product->get_max_purchase_quantity();
-                                                }
+                                                <div class="flex items-center bg-white sm:bg-slate-100/50 p-1 rounded-lg md:rounded-xl ring-1 ring-slate-200/50 shadow-inner w-full sm:w-auto justify-center">
+                                                    @php
+                                                    if ( $_product->is_sold_individually() ) {
+                                                        $min_quantity = 1;
+                                                        $max_quantity = 1;
+                                                    } else {
+                                                        $min_quantity = 0;
+                                                        $max_quantity = $_product->get_max_purchase_quantity();
+                                                    }
 
-                                                $product_quantity = woocommerce_quantity_input(
-                                                    array(
-                                                        'input_name'   => "cart[{$cart_item_key}][qty]",
-                                                        'input_value'  => $cart_item['quantity'],
-                                                        'max_value'    => $max_quantity,
-                                                        'min_value'    => $min_quantity,
-                                                        'product_name' => $product_name,
-                                                        'classes'      => ['w-16', 'md:w-20', 'text-center', 'font-medium', 'rounded-lg', 'border-slate-300', 'bg-white', 'py-1.5', 'text-sm', 'focus:ring-indigo-500', 'focus:border-indigo-500']
-                                                    ),
-                                                    $_product,
-                                                    false
-                                                );
-                                                @endphp
+                                                    $product_quantity = woocommerce_quantity_input(
+                                                        array(
+                                                            'input_name'   => "cart[{$cart_item_key}][qty]",
+                                                            'input_value'  => $cart_item['quantity'],
+                                                            'max_value'    => $max_quantity,
+                                                            'min_value'    => $min_quantity,
+                                                            'product_name' => $product_name,
+                                                            'classes'      => ['w-full', 'sm:w-12', 'md:w-10', 'text-center', 'font-black', 'bg-transparent', 'border-none', 'p-0', 'text-xs', 'md:text-sm', 'focus:ring-0']
+                                                        ),
+                                                        $_product,
+                                                        false
+                                                    );
+                                                    @endphp
 
-                                                {!! apply_filters( 'woocommerce_cart_item_quantity', $product_quantity, $cart_item_key, $cart_item ) !!}
+                                                    <div class="w-full flex justify-center">
+                                                        {!! apply_filters( 'woocommerce_cart_item_quantity', $product_quantity, $cart_item_key, $cart_item ) !!}
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </td>
-
-                                        {{-- SUBTOTAL --}}
-                                        <td class="py-6 text-right product-subtotal font-bold text-indigo-600 text-base md:text-lg align-middle" data-title="{{ esc_attr__( 'Subtotal', 'woocommerce' ) }}">
-                                            {!! apply_filters( 'woocommerce_cart_item_subtotal', WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ), $cart_item, $cart_item_key ) !!}
-                                        </td>
-
-                                        {{-- ELIMINAR --}}
-                                        <td class="py-6 text-right product-remove align-middle">
-                                            @php
-                                            $remove_url = esc_url( wc_get_cart_remove_url( $cart_item_key ) );
-                                            $remove_label = esc_attr( sprintf( __( 'Remove %s from cart', 'woocommerce' ), wp_strip_all_tags( $product_name ) ) );
-                                            @endphp
-                                            
-                                            <a href="{{ $remove_url }}" class="remove text-red-500 hover:text-red-700 hover:bg-red-50 p-2 rounded-full inline-flex items-center justify-center transition-colors" aria-label="{{ $remove_label }}" data-product_id="{{ esc_attr( $product_id ) }}" data-product_sku="{{ esc_attr( $_product->get_sku() ) }}">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                                                </svg>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-
-                            @php
-                                do_action('woocommerce_cart_contents');
-                            @endphp
-
-                            {{-- ACCIONES INFERIORES --}}
-                            <tr class="bg-slate-50/50">
-                                <td colspan="5" class="py-4 actions">
-                                    <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-                                        
-                                        @if ( wc_coupons_enabled() )
-                                            <div class="coupon flex w-full sm:w-auto gap-3">
-                                                <flux:input 
-                                                    name="coupon_code" 
-                                                    id="coupon_code" 
-                                                    value="" 
-                                                    placeholder="{{ esc_attr__( 'Coupon code', 'woocommerce' ) }}"
-                                                    class="min-w-[150px] md:min-w-[200px]"
-                                                />
-                                                <flux:button type="submit" variant="primary" name="apply_coupon" value="{{ esc_attr__('Apply coupon', 'woocommerce') }}">
-                                                    {{ __('Apply coupon', 'woocommerce') }}
-                                                </flux:button>
-                                                
-                                                @php
-                                                    do_action('woocommerce_cart_coupon');
-                                                @endphp
-                                            </div>
-                                        @endif
-
-                                        <flux:button type="submit" variant="outline" class="w-full sm:w-auto" name="update_cart" value="{{ esc_attr__('Update cart', 'woocommerce') }}">
-                                            {{ __('Update cart', 'woocommerce') }}
-                                        </flux:button>
-
-                                        @php
-                                            do_action('woocommerce_cart_actions');
-                                            wp_nonce_field('woocommerce-cart', 'woocommerce-cart-nonce');
-                                        @endphp
+                                        </div>
                                     </div>
-                                </td>
-                            </tr>
+                                    
+                                    {{-- Bottom Accents --}}
+                                    <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary-500/10 to-transparent"></div>
+                                </flux:card>
+                            </div>
+                        @endif
+                    @endforeach
 
-                            @php
-                                do_action('woocommerce_after_cart_contents');
-                            @endphp
-                        </tbody>
-                    </table>
+                    @php
+                    do_action('woocommerce_cart_contents');
+                    @endphp
+
+                    {{-- ACTION BAR (COUPON & UPDATE) --}}
+                    <div class="pt-3 md:pt-6 w-full">
+                        <div class="p-3 md:p-5 bg-slate-50/50 rounded-xl md:rounded-2xl border-none ring-1 ring-slate-200/40">
+                            <div class="flex flex-col sm:flex-row justify-between items-center gap-3 md:gap-6 min-w-0">
+                                
+                                @if ( wc_coupons_enabled() )
+                                    <div class="coupon flex flex-row w-full sm:w-auto gap-2 items-end">
+                                        <div class="flex-grow">
+                                            <flux:input 
+                                                label="{{ __('Coupon', 'woocommerce') }}"
+                                                name="coupon_code" 
+                                                id="coupon_code" 
+                                                value="" 
+                                                placeholder="{{ esc_attr__( 'CODE', 'detodo24' ) }}"
+                                                class="w-full sm:min-w-[140px]"
+                                                variant="outline"
+                                                size="sm"
+                                            />
+                                        </div>
+                                        <button type="submit" name="apply_coupon" value="{{ esc_attr__('Apply', 'woocommerce') }}" class="mb-[1px] h-8 md:h-9 px-4 font-bold bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-all text-[11px] md:text-xs tracking-wide">
+                                            {{ __('Apply', 'woocommerce') }}
+                                        </button>
+                                    </div>
+                                @endif
+
+                                <div class="flex gap-3 w-full sm:w-auto mt-1 sm:mt-0 min-w-0 justify-end items-end">
+                                    <flux:button type="submit" variant="primary" class="w-full sm:w-auto mt-1 sm:mt-0" name="update_cart" value="{{ esc_attr__('Update Cart', 'woocommerce') }}">
+                                        {{ __('Update Cart', 'woocommerce') }}
+                                    </flux:button>
+
+                                    @php
+                                    do_action('woocommerce_cart_actions');
+                                    wp_nonce_field('woocommerce-cart', 'woocommerce-cart-nonce');
+                                    @endphp
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @php
+                    do_action('woocommerce_after_cart_contents');
+                    @endphp
                 </div>
+
                 @php
-                    do_action('woocommerce_after_cart_table');
+                do_action('woocommerce_after_cart_table');
                 @endphp
             </form>
         </div>
 
 
-        {{-- ==================== COLUMNA DERECHA: TOTALES ==================== --}}
-        <div class="w-full lg:w-1/3">
-            <div class="cart-collaterals sticky top-24"
-                 x-show="show"
-                 x-transition:enter="transition ease-out duration-700 delay-300"
-                 x-transition:enter-start="opacity-0 translate-x-8"
-                 x-transition:enter-end="opacity-100 translate-x-0"
-            >
+        {{-- ==================== RIGHT COLUMN: TOTALS ==================== --}}
+        <div class="w-full lg:w-[45%]">
+            <div class="cart-collaterals sticky top-32">
                 @php
-                    do_action('woocommerce_before_cart_collaterals');
+                do_action('woocommerce_before_cart_collaterals');
                 @endphp
                 
-                <flux:card class="border-t-4 border-t-indigo-600 p-6 md:p-8 shadow-xl relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-br from-indigo-50/50 to-transparent pointer-events-none"></div>
-                    <div class="relative z-10">
-                        @php
-                            do_action('woocommerce_cart_collaterals');
-                        @endphp
-                    </div>
-                </flux:card>
+                {{-- Totals will be loaded here via woo defaults or custom overrides --}}
+                <div class="cart-totals-container">
+                    @php
+                    do_action('woocommerce_cart_collaterals');
+                    @endphp
+                </div>
             </div>
         </div>
 
     </div>
+
+    @php
+    do_action('woocommerce_after_cart');
+    @endphp
 </div>
 
-@php
-    do_action('woocommerce_after_cart');
-@endphp
+<style>
+    /* Luxury Quantity Input overrides */
+    .woocommerce-cart-form__cart-item input[type="number"]::-webkit-inner-spin-button,
+    .woocommerce-cart-form__cart-item input[type="number"]::-webkit-outer-spin-button {
+        /* Keep them for native function but we might style them or use buttons later */
+    }
+    .woocommerce-cart-form__cart-item .quantity {
+        display: flex;
+        align-items: center;
+    }
+</style>
